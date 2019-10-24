@@ -1,6 +1,8 @@
 package com.shendu.ssm.utils;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
+import com.shendu.ssm.domain.Attendance;
+
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -9,12 +11,16 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
-import com.shendu.ssm.domain.User;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ReadExcel {
@@ -32,13 +38,13 @@ public class ReadExcel {
     public int getTotalCells() {  return totalCells;}   
     //获取错误信息  
     public String getErrorInfo() { return errorMsg; }
-    List<User> userList;
+    List<Attendance> attendanceList;
   /** 
    * 读EXCEL文件，获取信息集合 
    * @param fielName 
    * @return 
    */  
-    public List<User> getExcelInfo(MultipartFile mFile) {
+    public List<Attendance> getExcelInfo(MultipartFile mFile) {
         String fileName = mFile.getOriginalFilename();//获取文件名
 
         try {  
@@ -48,12 +54,12 @@ public class ReadExcel {
             boolean isExcel2003 = true;// 根据文件名判断文件是2003版本还是2007版本  
             if (isExcel2007(fileName)) {  
                 isExcel2003 = false;  
-            }  
-             userList = (List<User>) createExcel(mFile.getInputStream(), isExcel2003);
+            }
+            attendanceList = (List<Attendance>) createExcel(mFile.getInputStream(), isExcel2003);
         } catch (Exception e) {  
             e.printStackTrace();  
         }
-        return userList;
+        return attendanceList;
     }  
     
   /** 
@@ -63,7 +69,7 @@ public class ReadExcel {
    * @return 
    * @throws IOException 
    */  
-    public List<User> createExcel(InputStream is, boolean isExcel2003) {
+    public List<Attendance> createExcel(InputStream is, boolean isExcel2003) {
 
         try{  
             Workbook wb = null;
@@ -71,12 +77,12 @@ public class ReadExcel {
                 wb = new HSSFWorkbook(is);
             } else {// 当excel是2007时,创建excel2007  
                 wb = new XSSFWorkbook(is);
-            }  
-            userList = readExcelValue(wb);// 读取Excel里面客户的信息
+            }
+            attendanceList = readExcelValue(wb);// 读取Excel里面客户的信息
         } catch (IOException e) {
             e.printStackTrace();  
         }  
-        return userList;  
+        return attendanceList;
     }  
     
   /** 
@@ -84,7 +90,7 @@ public class ReadExcel {
    * @param wb 
    * @return 
    */  
-    private List<User> readExcelValue(Workbook wb) {  
+    private List<Attendance> readExcelValue(Workbook wb) {
         // 得到第一个shell  
         Sheet sheet = wb.getSheetAt(0);
         // 得到Excel的行数  
@@ -93,47 +99,41 @@ public class ReadExcel {
         if (totalRows > 1 && sheet.getRow(0) != null) {  
             this.totalCells = sheet.getRow(0).getPhysicalNumberOfCells();  
         }  
-        List<User> userList = new ArrayList<User>();
+        List<Attendance> attendanceList = new ArrayList<Attendance>();
         // 循环Excel行数  
         for (int r = 1; r < totalRows; r++) {  
             Row row = sheet.getRow(r);
             if (row == null){  
                 continue;  
-            }  
-            User user = new User();  
+            }
+            Attendance attendance = new Attendance();
             // 循环Excel的列  
             for (int c = 0; c < this.totalCells; c++) {  
                 Cell cell = row.getCell(c);
                 if (null != cell) {  
-                    if (c == 0) {  
-                        //如果是纯数字,比如你写的是25,cell.getNumericCellValue()获得是25.0,通过截取字符串去掉.0获得25  
-                        if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){
-                            String name = String.valueOf(cell.getNumericCellValue());  
-                            user.setName(name.substring(0, name.length()-2>0?name.length()-2:1));//名称  
-                        }else{  
-                            user.setName(cell.getStringCellValue());//名称  
-                        }  
-                    } else if (c == 1) {  
-                        if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){  
-                            String sex = String.valueOf(cell.getNumericCellValue());  
-                            user.setSex(sex.substring(0, sex.length()-2>0?sex.length()-2:1));//性别  
-                        }else{  
-                            user.setSex(cell.getStringCellValue());//性别  
-                        }  
+                    if (c == 0) {
+
+                        attendance.setName(getValue(cell));//名称
+
+                    } else if (c == 1) {
+
+                        try {
+                            attendance.setAttendanceDate(DateUtils.string2Date(getValue(cell),"yyyy-MM-dd HH:mm"));//考勤时间
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
                     } else if (c == 2){  
-                        if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC){  
-                            String age = String.valueOf(cell.getNumericCellValue());  
-                            user.setAge(age.substring(0, age.length()-2>0?age.length()-2:1));//年龄  
-                        }else{  
-                            user.setAge(cell.getStringCellValue());//年龄  
-                        }  
+
+                            attendance.setStatus(Integer.valueOf(getValue(cell)));//状态
+
                     }  
                 }  
             }  
             // 添加到list  
-            userList.add(user);  
+            attendanceList.add(attendance);
         }  
-        return userList;  
+        return attendanceList;
     }  
       
     /** 
@@ -158,5 +158,61 @@ public class ReadExcel {
     //@描述：是否是2007的excel，返回true是2007   
     public static boolean isExcel2007(String filePath)  {    
          return filePath.matches("^.+\\.(?i)(xlsx)$");    
-     }    
+     }
+    /**
+     * 描述：对表格中数值进行格式化
+     * @param cell
+     * @return
+     */
+    //解决excel类型问题，获得数值
+    public  String getValue(Cell cell) {
+        String value = "";
+        if(null==cell){
+            return value;
+        }
+        switch (cell.getCellType()) {
+            //数值型
+            case Cell.CELL_TYPE_NUMERIC:
+                if (HSSFDateUtil.isCellDateFormatted(cell)) {
+                    //如果是date类型则 ，获取该cell的date值
+                    Date date = HSSFDateUtil.getJavaDate(cell.getNumericCellValue());
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                    value = format.format(date);;
+                }else {// 纯数字
+                    BigDecimal big=new BigDecimal(cell.getNumericCellValue());
+                    value = big.toString();
+                    //解决1234.0  去掉后面的.0
+                    if(null!=value&&!"".equals(value.trim())){
+                        String[] item = value.split("[.]");
+                        if(1<item.length&&"0".equals(item[1])){
+                            value=item[0];
+                        }
+                    }
+                }
+                break;
+            //字符串类型
+            case Cell.CELL_TYPE_STRING:
+                value = cell.getStringCellValue().toString();
+                break;
+            // 公式类型
+            case Cell.CELL_TYPE_FORMULA:
+                //读公式计算值
+                value = String.valueOf(cell.getNumericCellValue());
+                if (value.equals("NaN")) {// 如果获取的数据值为非法值,则转换为获取字符串
+                    value = cell.getStringCellValue().toString();
+                }
+                break;
+            // 布尔类型
+            case Cell.CELL_TYPE_BOOLEAN:
+                value = " "+ cell.getBooleanCellValue();
+                break;
+            default:
+                value = cell.getStringCellValue().toString();
+        }
+        if("null".endsWith(value.trim())){
+            value="";
+        }
+        return value;
+    }
+
 } 
