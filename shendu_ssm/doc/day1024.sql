@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50637
 File Encoding         : 65001
 
-Date: 2019-10-26 10:13:00
+Date: 2019-10-26 16:28:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,30 +24,31 @@ CREATE TABLE `attendance` (
   `name` varchar(25) COLLATE utf8_bin NOT NULL COMMENT '姓名',
   `time` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '时间',
   `stater` varchar(50) COLLATE utf8_bin NOT NULL COMMENT '状态',
+  `attendance_time` datetime DEFAULT NULL COMMENT '记录班时间 下班时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of attendance
 -- ----------------------------
-INSERT INTO `attendance` VALUES ('1', '张三', '1899-12-31 00:00:00', '1');
-INSERT INTO `attendance` VALUES ('2', '李四', '2019-10-24 00:00:00', '0');
-INSERT INTO `attendance` VALUES ('3', '小五', '2019-10-24 00:00:00', '3');
-INSERT INTO `attendance` VALUES ('4', '张三', '1899-12-31 00:00:00', '1');
-INSERT INTO `attendance` VALUES ('5', '李四', '2019-10-24 15:24:00', '0');
-INSERT INTO `attendance` VALUES ('6', '小五', '2019-10-24 15:24:00', '3');
-INSERT INTO `attendance` VALUES ('7', '张三', '1899-12-31 00:00:00', '1');
-INSERT INTO `attendance` VALUES ('8', '李四', '2019-10-24 15:24:00', '0');
-INSERT INTO `attendance` VALUES ('9', '小五', '2019-10-24 15:24:00', '3');
-INSERT INTO `attendance` VALUES ('10', '张三', '1899-12-31 00:00:00', '1');
-INSERT INTO `attendance` VALUES ('11', '李四', '2019-10-24 15:24:00', '0');
-INSERT INTO `attendance` VALUES ('12', '小五', '2019-10-24 15:24:00', '3');
-INSERT INTO `attendance` VALUES ('13', '张三', '1899-12-31 00:00:00', '1');
-INSERT INTO `attendance` VALUES ('14', '李四', '2019-10-24 15:24:00', '0');
-INSERT INTO `attendance` VALUES ('15', '小五', '2019-10-24 15:24:00', '3');
-INSERT INTO `attendance` VALUES ('16', '张三', '1899-12-31 00:00:00', '1');
-INSERT INTO `attendance` VALUES ('17', '李四', '2019-10-24 15:24:00', '0');
-INSERT INTO `attendance` VALUES ('18', '小五', '2019-10-24 15:24:00', '3');
+INSERT INTO `attendance` VALUES ('1', '张三', '1899-12-31 00:00:00', '1', null);
+INSERT INTO `attendance` VALUES ('2', '李四', '2019-10-24 00:00:00', '0', null);
+INSERT INTO `attendance` VALUES ('3', '小五', '2019-10-24 00:00:00', '3', null);
+INSERT INTO `attendance` VALUES ('4', '张三', '1899-12-31 00:00:00', '1', null);
+INSERT INTO `attendance` VALUES ('5', '李四', '2019-10-24 15:24:00', '0', null);
+INSERT INTO `attendance` VALUES ('6', '小五', '2019-10-24 15:24:00', '3', null);
+INSERT INTO `attendance` VALUES ('7', '张三', '1899-12-31 00:00:00', '1', null);
+INSERT INTO `attendance` VALUES ('8', '李四', '2019-10-24 15:24:00', '0', null);
+INSERT INTO `attendance` VALUES ('9', '小五', '2019-10-24 15:24:00', '3', null);
+INSERT INTO `attendance` VALUES ('10', '张三', '1899-12-31 00:00:00', '1', null);
+INSERT INTO `attendance` VALUES ('11', '李四', '2019-10-24 15:24:00', '0', null);
+INSERT INTO `attendance` VALUES ('12', '小五', '2019-10-24 15:24:00', '3', null);
+INSERT INTO `attendance` VALUES ('13', '张三', '1899-12-31 00:00:00', '1', null);
+INSERT INTO `attendance` VALUES ('14', '李四', '2019-10-24 15:24:00', '0', null);
+INSERT INTO `attendance` VALUES ('15', '小五', '2019-10-24 15:24:00', '3', null);
+INSERT INTO `attendance` VALUES ('16', '张三', '1899-12-31 00:00:00', '1', null);
+INSERT INTO `attendance` VALUES ('17', '李四', '2019-10-24 15:24:00', '0', null);
+INSERT INTO `attendance` VALUES ('18', '小五', '2019-10-24 15:24:00', '3', null);
 
 -- ----------------------------
 -- Table structure for permission
