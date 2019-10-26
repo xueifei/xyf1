@@ -1,68 +1,55 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%
-    String path = request.getContextPath();
-    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
 <html>
-<head>
-    <base href="<%=basePath%>">
-    <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
-    <script type="text/javascript" src="js/jquery.form.js"></script>
-    <title>My JSP 'index.jsp' starting page</title>
-    <script type="text/javascript">
-        //ajax 方式上传文件操作
-        $(document).ready(function(){
-            $('#btn').click(function(){
-                if(checkData()){
-                    $('#form1').ajaxSubmit({
-                        url:'${pageContext.request.contextPath}/attendance/Upload.do',
-                        dataType: 'text',
-                        success: resutlMsg,
-                        error: errorMsg
-                    });
-                    function resutlMsg(msg){
-                        alert(msg);
-                        $("#upfile").val("");
-                    }
-                    function errorMsg(){
-                        alert("导入excel出错！");
-                    }
-                }
-            });
-        });
-
-        //JS校验form表单信息
-        function checkData(){
-            var fileDir = $("#upfile").val();
-            var suffix = fileDir.substr(fileDir.lastIndexOf("."));
-            if("" == fileDir){
-                alert("选择需要导入的Excel文件！");
-                return false;
-            }
-            if(".xls" != suffix && ".xlsx" != suffix ){
-                alert("选择Excel格式的文件导入！");
-                return false;
-            }
-            return true;
-        }
-    </script>
-</head>
-
+<script  type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.12.4.js"></script>
 <body>
-<div>1.通过简单的form表单提交方式，进行文件的上</br> 2.通过jquery.form.js插件提供的form表单一步提交功能 </div></br>
-<form method="POST"  enctype="multipart/form-data" id="form1" action="${pageContext.request.contextPath}/attendance/upload.do">
-    <table>
-        <tr>
-            <td>上传文件: </td>
-            <td> <input id="upfile" type="file" name="file"></td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="提交" onclick="return checkData()"></td>
-            <td><input type="button" value="ajax方式提交" id="btn" name="btn" ></td>
-        </tr>
-    </table>
-</form>
+<h2>Excel文件上传</h2>
+<div>
+    <form enctype="multipart/form-data" id="makes" itemtype="post">
+        <span>选择文件</span><br>
+        <input type="file" id="excelFile" name="file"><br>
+        <button type="submit" οnclick="importExc()" >导入</button>
+    </form>
+</div>
 
 </body>
 </html>
+<script>
+    function importExc() {
+        var formData = new FormData();
+        //检验导入的文件是否为Excel文件
+        var uploadFile = document.getElementById("excelFile").value;
+        formData.append("excelFile",$("#excelFile")[0].files[0]);
+        formData.append("name",uploadFile);
+        if(uploadFile == null || uploadFile == ''){
+            layer.msg("请选择要上传的Excel文件");
+            return false;
+        }else{
+            var fileExtend = uploadFile.substring(uploadFile.lastIndexOf('.')).toLowerCase();
+            if(fileExtend == '.xls'){
+            }else{
+                layer.msg("文件格式需为'.xls'格式");
+                return false;
+            }
+        } $.ajax({
+            type:"post",
+            url:"${pageContext.request.contextPath }/user/upload.do",
+            data:formData,
+            // 告诉jQuery不要去处理发送的数据
+            processData : false,
+            // 告诉jQuery不要去设置Content-Type请求头
+            contentType : false,
+            beforeSend:function(){
+                console.log("正在进行，请稍候");
+            },
+            success:function (data) {
+                if(data=="1"){
+                    layer.msg("导入成功");
+                }else{
+                    layer.error("导入失败");
+                }
+            }
+        })
+    }
+</script>
