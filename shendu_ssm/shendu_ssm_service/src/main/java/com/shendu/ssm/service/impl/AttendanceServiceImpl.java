@@ -17,7 +17,7 @@ public class AttendanceServiceImpl implements AttendanceService {
     @Autowired
     private AttendanceDao attendanceDao;
     @Override
-    public String readExcelFile(MultipartFile file) {
+    public List<Attendance> readExcelFile(MultipartFile file) {
         String result ="";  
         //创建处理EXCEL的类  
         ReadExcel readExcel=new ReadExcel();
@@ -25,11 +25,18 @@ public class AttendanceServiceImpl implements AttendanceService {
         List<Attendance> attendanceList = readExcel.getExcelInfo(file);
         //至此已经将excel中的数据转换到list里面了,接下来就可以操作list,可以进行保存到数据库,或者其他操作,  
         //和你具体业务有关,这里不做具体的示范  
+
+        return attendanceList;
+    }
+
+    @Override
+    public int insertInfoBatch(List<Attendance> attendanceList) {
+        int i = 0;
         if(attendanceList != null && !attendanceList.isEmpty()){
-            int i = attendanceDao.insertInfoBatch(attendanceList);
-            result = i>0?"上传成功":"上传失败";
+            i = attendanceDao.insertInfoBatch(attendanceList);
+
         }
-        return result;  
-    }  
-   
+        return i;
+    }
+
 } 

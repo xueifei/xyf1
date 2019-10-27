@@ -26,6 +26,7 @@
         <input type="file" id="excelFile" name="file"><br>
         <button type="submit" οnclick="importExc()" >导入</button>
     </form>
+    <p>${result}</p>
 </div>
 </body>
 </html>
