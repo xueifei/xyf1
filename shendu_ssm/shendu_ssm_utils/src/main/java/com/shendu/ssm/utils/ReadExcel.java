@@ -113,7 +113,7 @@ public class ReadExcel {
                 if (null != cell) {  
                     if (c == 0) {
 
-                        attendance.setName(getValue(cell));//名称
+                        attendance.setName(getValue(cell));//姓名
 
                     } else if (c == 1) {
 
@@ -127,7 +127,19 @@ public class ReadExcel {
 
                             attendance.setStatus(Integer.valueOf(getValue(cell)));//状态
 
-                    }  
+                    } else if (c == 3) {
+
+                        try {
+                            attendance.setCreateDate(DateUtils.string2Date(getValue(cell),"yyyy-MM-dd HH:mm"));//考勤时间
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                    }else if (c == 4){
+
+                        attendance.setSId(Integer.valueOf(getValue(cell)));//学生详情id
+
+                    }
                 }  
             }  
             // 添加到list  

@@ -10,11 +10,13 @@ import java.util.Date;
 public class Attendance {
 
 
-    private Integer id;
+    private Long id;
     private String name;
     private Date attendanceDate; //考勤时间
     private Integer status; //考勤状态 0 正常 1 迟到 2 旷课
     private String statusStr;
+    private Date createDate;
+    private Integer sId;//学生编号，唯一标识，对应学生详情表id
 
     public String getStatusStr() {
         if (status !=null){

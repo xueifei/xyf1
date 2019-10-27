@@ -2,7 +2,7 @@ package com.shendu.ssm.service.impl;
 
 import com.shendu.ssm.domain.Attendance;
 
-import com.shendu.ssm.mapper.AttendanceMapper;
+import com.shendu.ssm.mapper.AttendanceDao;
 import com.shendu.ssm.service.AttendanceService;
 import com.shendu.ssm.utils.ReadExcel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import java.util.List;
 public class AttendanceServiceImpl implements AttendanceService {
 
     @Autowired
-    private AttendanceMapper attendanceMapper;
+    private AttendanceDao attendanceDao;
     @Override
     public String readExcelFile(MultipartFile file) {
         String result ="";  
@@ -26,11 +26,9 @@ public class AttendanceServiceImpl implements AttendanceService {
         //至此已经将excel中的数据转换到list里面了,接下来就可以操作list,可以进行保存到数据库,或者其他操作,  
         //和你具体业务有关,这里不做具体的示范  
         if(attendanceList != null && !attendanceList.isEmpty()){
-            int i = attendanceMapper.insertInfoBatch(attendanceList);
-            result = "上传成功"+i+"条数据";
-        }else{  
-            result = "上传失败";  
-        }  
+            int i = attendanceDao.insertInfoBatch(attendanceList);
+            result = i>0?"上传成功":"上传失败";
+        }
         return result;  
     }  
    

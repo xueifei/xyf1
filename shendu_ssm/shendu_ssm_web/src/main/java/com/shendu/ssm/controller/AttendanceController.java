@@ -18,12 +18,13 @@ public class AttendanceController {
     @Autowired
     private AttendanceService attendanceService;
 
-    @RequestMapping(value="/upload.do",method = RequestMethod.POST)
-    @ResponseBody
+    @RequestMapping(value="/upload",method = RequestMethod.POST)
     public String  upload(@RequestParam(value="file",required = false) MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 
         String result = attendanceService.readExcelFile(file);
-
-        return result;
+        if (result == "上传成功"){
+            return "index";
+        }
+        return "login";
     }
 }

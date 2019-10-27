@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shendu.ssm.mapper.AttendanceMapper" >
+<mapper namespace="com.shendu.ssm.mapper.AttendanceDao" >
 <!--    <resultMap id="BaseResultMap" type="cn.com.entity.people" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="username" property="userName" jdbcType="VARCHAR" />
@@ -70,10 +70,10 @@
 
 
     <insert id="insertInfoBatch" parameterType="java.util.List">
-        insert into attendance ( name, time, stater)
+        insert into attendance ( name, attendance_time, stater,time,s_id)
         values
         <foreach collection="list" item="item" index="index" separator=",">
-            ( #{item.name,jdbcType=VARCHAR}, #{item.attendanceDate,jdbcType=TIMESTAMP},#{item.status,jdbcType=INTEGER})
+            ( #{item.name,jdbcType=VARCHAR}, #{item.attendanceDate,jdbcType=TIMESTAMP},#{item.status,jdbcType=INTEGER},#{item.createDate,jdbcType=TIMESTAMP},#{item.sId,jdbcType=INTEGER})
         </foreach>
     </insert>
 </mapper>
