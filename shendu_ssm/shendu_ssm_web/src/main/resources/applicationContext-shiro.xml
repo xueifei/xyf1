@@ -30,10 +30,10 @@
                 <!-- anon 表示此地址不需要任何权限即可访问 -->
                 /login=anon
                 /index=anon
-                /WEB-INF/static/themes/**=anon
-                /WEB-INF/static/img/**=anon
-                /WEB-INF/static/js/**=anon
-                /WEB-INF/static/css/**=anon
+                /css/**=anon
+                /img/**=anon
+                /js/**=anon
+                /plugins/**=anon
                 <!-- 权限配置，只允许 admin 访问 -->
                 /admin/**=roles[admin]
                 /attendance/upload/**=roles[admin]
