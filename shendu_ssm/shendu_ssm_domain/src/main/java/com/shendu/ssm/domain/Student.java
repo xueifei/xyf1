@@ -4,7 +4,7 @@ import lombok.Data;
 
 //学生详情
 @Data
-public class student {
+public class Student {
     private Integer id;
     private String name;
     private String address;
