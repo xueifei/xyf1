@@ -63,6 +63,21 @@
 						$("form").get(0).reset();
 					})
 				})
+			/**
+			 * 项目路径
+			 */
+
+			window.onload=function(){
+				getPath();
+			}
+
+			function getPath(){
+
+				var pathName = document.location.pathname;
+				var index = pathName.substr(1).indexOf("/");
+				var result = pathName.substr(0,index+1);
+				$("#btnCon").val(result);
+			}
 		</script>
 	</head>
 
@@ -71,7 +86,7 @@
 			<!--创建登录面板-->
 			<div id="login" class="easyui-panel" title="登录" data-options="iconCls:'icon-mlogin',minimizable:true,maximizable:true
 				,collapsible:true,closable:true" style="width: 500px;height: 200px;">
-				<form action="/login" method="post">
+				<form action=getPath()+"main.html" method="post">
 					<table>
 						<tr>
 							<td>用户名:</td>
@@ -87,13 +102,12 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-								<a id="btnCon" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save'">登录</a>&nbsp; &nbsp;&nbsp;
+								<a id="btnCon" href="/login" class="easyui-linkbutton" data-options="iconCls:'icon-save'">登录</a>&nbsp; &nbsp;&nbsp;
 								<a id="btnCan" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">重置</a>
 							</td>
 						</tr>
 					</table>
 				</form>
-				<div>${error}</div>
 			</div>
 		</div>
 	</body>

@@ -24,9 +24,9 @@
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <!-- JSP文件所在的目录 -->
-        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="prefix" value="/WEB-INF/static/" />
         <!-- 文件的后缀名 -->
-        <property name="suffix" value=".jsp" />
+        <property name="suffix" value=".html" />
     </bean>
 
    <!-- &lt;!&ndash; 设置静态资源不过滤 &ndash;&gt;
