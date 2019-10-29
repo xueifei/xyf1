@@ -13,11 +13,11 @@
     </select>
 
     <insert id="insertRole">
-        INSERT into role(name,desc_) VALUES (#{name},#{desc_})
+        INSERT into role(name,desc_) VALUES (#{name},#{desc})
     </insert>
 
     <update id="updateRole">
-        UPDATE role set name=#{name},desc_=#{desc_} WHERE id = #{id}
+        UPDATE role set name=#{name},desc_=#{desc} WHERE id = #{id}
     </update>
 
     <delete id="deleteRoleByID">

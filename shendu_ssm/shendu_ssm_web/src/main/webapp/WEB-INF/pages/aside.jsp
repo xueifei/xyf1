@@ -47,11 +47,11 @@
 					</a>
 					</li>
 					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/role/findAll.do"> <i
+						href="${pageContext.request.contextPath}/admin/listRole"> <i
 							class="fa fa-circle-o"></i> 角色管理
 					</a></li>
 					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/permission/findAll.do">
+						href="${pageContext.request.contextPath}/admin/listPermission">
 							<i class="fa fa-circle-o"></i> 资源权限管理
 					</a></li>
 <%--					<li id="system-setting">

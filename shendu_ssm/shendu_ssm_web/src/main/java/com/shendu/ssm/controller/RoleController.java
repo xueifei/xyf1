@@ -47,9 +47,15 @@ public class RoleController {
 	@RequestMapping("addRole")
 	public String list(Role role) {
 		System.out.println(role.getName());
-		System.out.println(role.getDesc_());
+		System.out.println(role.getDesc());
 		roleService.addRole(role);
 		return "redirect:listRole";
+	}
+
+	@RequestMapping("addRole1")
+	public String addRole1() {
+
+		return "addRole";
 	}
 
 	@RequestMapping("editRole")

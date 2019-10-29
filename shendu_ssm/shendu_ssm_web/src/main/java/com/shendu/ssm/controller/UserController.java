@@ -68,6 +68,13 @@ public class UserController {
 		return "redirect:listUser";
 	}
 
+	@RequestMapping("addUser1")
+	public String add1() {
+
+
+		return "addUser";
+	}
+
 	/**
 	 * 更改用户，页面
 	 */

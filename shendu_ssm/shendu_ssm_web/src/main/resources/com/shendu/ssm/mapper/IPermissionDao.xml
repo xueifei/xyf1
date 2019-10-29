@@ -13,11 +13,11 @@
     </select>
 
     <insert id="insertPermission">
-        INSERT into permission(name,desc_,url) VALUES (#{name},#{desc_},#{url})
+        INSERT into permission(name,desc_,url) VALUES (#{name},#{desc},#{url})
     </insert>
 
     <update id="updatePermission">
-        UPDATE permission set name=#{name},desc_=#{desc_},url=#{url} WHERE id = #{id}
+        UPDATE permission set name=#{name},desc_=#{desc},url=#{url} WHERE id = #{id}
     </update>
 
     <delete id="deletePermission">
