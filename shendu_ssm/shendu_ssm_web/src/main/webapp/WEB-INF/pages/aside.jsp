@@ -64,7 +64,7 @@
 
 			</li>
 			<li class="treeview"><a href="#"> <i class="fa fa-cube"></i>
-					<span>基础数据</span> <span class="pull-right-container"> <i
+					<span>考勤数据</span> <span class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i>
 				</span>
 			</a>
@@ -72,11 +72,15 @@
 
 					<li id="system-setting"><a
 						href="${pageContext.request.contextPath}/product/findAll.do">
-							<i class="fa fa-circle-o"></i> 产品管理
+							<i class="fa fa-circle-o"></i> 考勤信息
 					</a></li>
 					<li id="system-setting"><a
 						href="${pageContext.request.contextPath}/orders/findAll.do?page=1&size=4"> <i
-							class="fa fa-circle-o"></i> 订单管理
+							class="fa fa-circle-o"></i>学生详细信息
+					</a></li>
+					<li id="system-setting"><a
+							href="${pageContext.request.contextPath}/orders/findAll.do?page=1&size=4"> <i
+							class="fa fa-circle-o"></i>短信记录
 					</a></li>
 
 				</ul></li>

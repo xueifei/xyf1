@@ -82,10 +82,10 @@
 				用户管理 <small>全部用户</small>
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="${pageContext.request.contextPath}/index1.jsp"><i
+				<li><a href="${pageContext.request.contextPath}/index.jsp"><i
 						class="fa fa-dashboard"></i> 首页</a></li>
 				<li><a
-					href="${pageContext.request.contextPath}/user/findAll.do">用户管理</a></li>
+					href="${pageContext.request.contextPath}/admin/listUser">用户管理</a></li>
 
 				<li class="active">全部用户</li>
 			</ol>
@@ -108,7 +108,7 @@
 							<div class="pull-left">
 								<div class="form-group form-inline">
 									<div class="btn-group">
-										<button type="button" class="btn btn-default" title="新建" onclick="location.href='user-add.jsp'">
+										<button type="button" class="btn btn-default" title="新建" onclick="location.href='addUser.jsp'">
 											<i class="fa fa-file-o"></i> 新建
 										</button>
 										
@@ -137,19 +137,19 @@
 										</th>
 										<th class="sorting_asc">ID</th>
 										<th class="sorting_desc">用户名</th>
-										<th class="sorting_asc sorting_asc_disabled">邮箱</th>
-										<th class="sorting_desc sorting_desc_disabled">联系电话</th>
-										<th class="sorting">状态</th>
+										<th class="sorting_desc sorting_desc_disabled">密码</th>
+										<th class="sorting_desc sorting_desc_disabled">加密盐</th>
+										<th class="sorting">角色</th>
 										<th class="text-center">操作</th>
 									</tr>
 								</thead>
 								<tbody>
 
-									<c:forEach items="${userList}" var="user">
+									<c:forEach items="${listUser}" var="user">
 										<tr>
 											<td><input name="ids" type="checkbox"></td>
 											<td>${user.id }</td>
-											<td>${user.username }</td>
+											<td>${user.name }</td>
 											<td>${user.email }</td>
 											<td>${user.phoneNum }</td>
 											<td>${user.statusStr }</td>											
