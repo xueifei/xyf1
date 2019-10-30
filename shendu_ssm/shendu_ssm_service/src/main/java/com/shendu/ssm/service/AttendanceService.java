@@ -12,10 +12,6 @@ public interface AttendanceService {
      */
     List<Attendance> readExcelFile( MultipartFile file);
 
-    //增加考勤表学生详细信息
-    List<Attendance> findDetailsBySId(List<Attendance> attendanceList) throws Exception;
-
     //将list集合数据保存到数据库
     int insertInfoBatch(List<Attendance> attendanceList);
-
 }

@@ -107,7 +107,7 @@
 									<div class="panel-heading">选择文件</div>
 									<div class="row data-type">
 
-										<div class="col-md-2 title">请选择Excel文件</div>
+										<div class="col-md-2 title"></div>
 										<div class="col-md-4 data">
 											<input type="file" id="excelFile" name="file" class="form-control">
 										</div>

@@ -37,14 +37,11 @@ public class UserController {
 	 */
 	@RequestMapping("listUser")
 	public String list(Model model, @RequestParam(name = "page", required = true, defaultValue = "1") int page, @RequestParam(name = "size", required = true, defaultValue = "4") int size) {
-<<<<<<< HEAD
 		List<User> listUser1 = userService.listUser(page, size);
-=======
-		List<User> listUser1 = userService.listUser(page, 1);
->>>>>>> 550343d377aca7efa011bf403d868c6c56758190
 		//PageInfo就是一个分页Bean
 		PageInfo listUser=new PageInfo(listUser1);
 		model.addAttribute("listUser", listUser);
+
 		// 一个用户对应一堆角色
 		Map<User, List<Role>> user_roles = new HashMap<>();
 		for (User user : listUser1) {

@@ -17,7 +17,7 @@ public class Attendance {
     private String statusStr;
     private Date createDate;
     private Integer sId;//学生编号，唯一标识，对应学生详情表id
-    private StudentDetail student;
+    private Student student;
     public String getStatusStr() {
         if (status !=null){
             if (status == 0){

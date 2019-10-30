@@ -22,30 +22,20 @@ public class AttendanceController {
     private AttendanceService attendanceService;
 
     @RequestMapping(value="/upload",method = RequestMethod.POST)
-    public ModelAndView upload(@RequestParam(value="file",required = false) MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ModelAndView upload(@RequestParam(value="file",required = false) MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         ModelAndView modelAndView = new ModelAndView();
         List<Attendance> attendances = attendanceService.readExcelFile(file);
         int i = attendanceService.insertInfoBatch(attendances);
-        List<Attendance> details = attendanceService.findDetailsBySId(attendances);
-        modelAndView.addObject("attendanceList",details);
+        modelAndView.addObject("attendanceList",attendances);
         modelAndView.addObject("result",i>0?"上传成功":"上传失败");
         modelAndView.setViewName("attendance");
         return modelAndView;
     }
 
-
-
-    //路由到upload页面
+    //
     @RequestMapping(value="/upload1")
     public String upload1() throws UnsupportedEncodingException {
 
         return "upload";
-    }
-
-    //路由到attendance页面
-    @RequestMapping(value="/details")
-    public String attendance() throws UnsupportedEncodingException {
-
-        return "attendance";
     }
 }

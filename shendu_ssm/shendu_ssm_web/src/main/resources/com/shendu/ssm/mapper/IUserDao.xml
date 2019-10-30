@@ -13,11 +13,7 @@
     </select>
 
     <select id="selectUserList" resultType="User">
-<<<<<<< HEAD
         select * from USER
-=======
-        select * from USER order by id desc
->>>>>>> 550343d377aca7efa011bf403d868c6c56758190
     </select>
 
     <insert id="insertUser">
