@@ -66,11 +66,11 @@
 				<ul class="treeview-menu">
 
 					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/product/findAll.do">
+						href="${pageContext.request.contextPath}/attendance/details">
 							<i class="fa fa-circle-o"></i> 考勤信息
 					</a></li>
 					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/orders/findAll.do?page=1&size=4"> <i
+						href="${pageContext.request.contextPath}/student/findAll"> <i
 							class="fa fa-circle-o"></i>学生详细信息
 					</a></li>
 					<li id="system-setting"><a
