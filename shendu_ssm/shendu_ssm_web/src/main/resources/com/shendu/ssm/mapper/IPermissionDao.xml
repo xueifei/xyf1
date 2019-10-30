@@ -12,6 +12,10 @@
         select * from permission ORDER BY id DESC
     </select>
 
+    <select id="PermissionList" resultType="Permission">
+        select * from permission
+    </select>
+
     <insert id="insertPermission">
         INSERT into permission(name,desc_,url) VALUES (#{name},#{desc},#{url})
     </insert>

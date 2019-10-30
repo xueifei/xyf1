@@ -1,5 +1,6 @@
 package com.shendu.ssm.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.shendu.ssm.domain.User;
 import com.shendu.ssm.mapper.IUserDao;
 import com.shendu.ssm.service.IUserService;
@@ -21,7 +22,9 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public List<User> listUser() {
+	public List<User> listUser(int page, int size) {
+		//参数pageNum 是页码值   参数pageSize 代表是每页显示条数
+		PageHelper.startPage(page, size);
 		return userDao.selectUserList();
 	}
 

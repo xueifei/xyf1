@@ -1,5 +1,6 @@
 package com.shendu.ssm.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.shendu.ssm.domain.Role;
 import com.shendu.ssm.domain.User;
 import com.shendu.ssm.service.IRoleService;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,13 +36,15 @@ public class UserController {
 	 * 用户列表
 	 */
 	@RequestMapping("listUser")
-	public String list(Model model) {
-		List<User> listUser = userService.listUser();
+	public String list(Model model, @RequestParam(name = "page", required = true, defaultValue = "1") int page, @RequestParam(name = "size", required = true, defaultValue = "4") int size) {
+		List<User> listUser1 = userService.listUser(page, size);
+		//PageInfo就是一个分页Bean
+		PageInfo listUser=new PageInfo(listUser1);
 		model.addAttribute("listUser", listUser);
 
 		// 一个用户对应一堆角色
 		Map<User, List<Role>> user_roles = new HashMap<>();
-		for (User user : listUser) {
+		for (User user : listUser1) {
 			List<Role> roles = roleService.listRoleByUser(user);
 			user_roles.put(user, roles);
 		}
@@ -79,8 +84,8 @@ public class UserController {
 	 * 更改用户，页面
 	 */
 	@RequestMapping("editUser")
-	public String edit(Model model, long id) {
-		List<Role> listRole = roleService.listRole();
+	public String edit(Model model, long id,int page,int size) {
+		List<Role> listRole = roleService.listRole(page,size);
 		model.addAttribute("listRole", listRole);
 		User user = userService.getUserByID(id);
 		model.addAttribute("user", user);

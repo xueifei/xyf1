@@ -1,7 +1,9 @@
 package com.shendu.ssm.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.shendu.ssm.domain.Permission;
 import com.shendu.ssm.domain.Role;
+import com.shendu.ssm.domain.User;
 import com.shendu.ssm.service.IPermissionService;
 import com.shendu.ssm.service.IRolePermissionService;
 import com.shendu.ssm.service.IRoleService;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,13 +32,15 @@ public class RoleController {
 	IPermissionService permissionService;
 
 	@RequestMapping("listRole")
-	public String list(Model model) {
-		List<Role> rs = roleService.listRole();
+	public String list(Model model, @RequestParam(name = "page", required = true, defaultValue = "1") int page, @RequestParam(name = "size", required = true, defaultValue = "4") int size) {
+		List<Role> rs1 = roleService.listRole(page, 2);
+		//PageInfo就是一个分页Bean
+		PageInfo rs=new PageInfo(rs1);
 		model.addAttribute("rs", rs);
 
 		Map<Role, List<Permission>> role_permissions = new HashMap<>();
 
-		for (Role role : rs) {
+		for (Role role : rs1) {
 			List<Permission> ps = permissionService.getPermissionListByRole(role);
 			role_permissions.put(role, ps);
 		}

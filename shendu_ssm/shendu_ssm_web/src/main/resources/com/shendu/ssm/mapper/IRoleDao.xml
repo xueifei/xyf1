@@ -9,7 +9,7 @@
     </select>
 
     <select id="selectRoleList" resultType="Role">
-        select * FROM role ORDER BY id desc
+        select * FROM role
     </select>
 
     <insert id="insertRole">
