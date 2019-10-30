@@ -98,7 +98,7 @@
 					<div class="box-body">
 
 						<!-- 数据表格 -->
-						<form action="addUser" enctype="multipart/form-data" id="makes"
+						<form action="${pageContext.request.contextPath}/attendance/upload" enctype="multipart/form-data" id="makes"
 							  method="post">
 							<!-- 正文区域 -->
 							<section class="content"> <!--产品信息-->
