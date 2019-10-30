@@ -1,5 +1,6 @@
 package com.shendu.ssm.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.shendu.ssm.domain.User;
 import com.shendu.ssm.mapper.IUserDao;
 import com.shendu.ssm.service.IUserService;
@@ -21,7 +22,8 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public List<User> listUser() {
+	public List<User> listUser(int page,int size) {
+		PageHelper.startPage(page,size);
 		return userDao.selectUserList();
 	}
 

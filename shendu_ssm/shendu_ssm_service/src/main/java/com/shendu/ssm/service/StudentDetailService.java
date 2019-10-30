@@ -10,4 +10,6 @@ public interface StudentDetailService {
     public boolean deleteStu(Integer id);
     public List<StudentDetail> findAll();
     public StudentDetail findById(Integer id);
+
+    boolean editStuClassBatch(String stuClass,Integer[] ids);
 }

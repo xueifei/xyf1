@@ -60,4 +60,15 @@ public class StudentDetailServiceImpl implements StudentDetailService {
         StudentDetail studentDetail = studentDetailDao.findById(id);
         return studentDetail;
     }
+
+    @Override
+    public boolean editStuClassBatch(String stuClass,Integer[] ids) {
+        try{
+            studentDetailDao.editStuClassBatch(stuClass,ids);
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
