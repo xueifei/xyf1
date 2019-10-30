@@ -9,7 +9,7 @@
     </select>
     
     <select id="selectPermissionList" resultType="Permission">
-        select * from permission ORDER BY id DESC
+        select * from permission ORDER BY id asc
     </select>
 
     <select id="PermissionList" resultType="Permission">
