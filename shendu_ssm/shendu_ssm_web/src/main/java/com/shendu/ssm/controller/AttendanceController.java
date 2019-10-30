@@ -28,7 +28,14 @@ public class AttendanceController {
         int i = attendanceService.insertInfoBatch(attendances);
         modelAndView.addObject("attendanceList",attendances);
         modelAndView.addObject("result",i>0?"上传成功":"上传失败");
-        modelAndView.setViewName("index");
+        modelAndView.setViewName("attendance");
         return modelAndView;
+    }
+
+    //
+    @RequestMapping(value="/upload1")
+    public String upload1() throws UnsupportedEncodingException {
+
+        return "upload";
     }
 }

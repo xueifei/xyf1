@@ -26,6 +26,8 @@ public class Attendance {
                 statusStr = "迟到";
             }else if (status == 3){
                 statusStr = "旷课";
+            }else if (status == 4){
+                statusStr = "请假";
             }
         }
 

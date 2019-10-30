@@ -54,12 +54,7 @@
 						href="${pageContext.request.contextPath}/admin/listPermission">
 							<i class="fa fa-circle-o"></i> 资源权限管理
 					</a></li>
-<%--					<li id="system-setting">
-						<a
-						href="${pageContext.request.contextPath}/sysLog/findAll.do"> <i
-							class="fa fa-circle-o"></i> 访问日志
-					</a>
-					</li>--%>
+
 				</ul>
 
 			</li>
@@ -82,6 +77,12 @@
 							href="${pageContext.request.contextPath}/orders/findAll.do?page=1&size=4"> <i
 							class="fa fa-circle-o"></i>短信记录
 					</a></li>
+					<li id="system-setting">
+						<a
+								href="${pageContext.request.contextPath}/attendance/upload1"> <i
+								class="fa fa-circle-o"></i> 考勤Excel表上传
+						</a>
+					</li>
 
 				</ul></li>
 

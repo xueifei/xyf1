@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50637
 File Encoding         : 65001
 
-Date: 2019-10-27 08:49:31
+Date: 2019-10-30 09:18:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,7 +27,7 @@ CREATE TABLE `attendance` (
   `time` datetime DEFAULT NULL COMMENT '记录班时间 下班时间',
   `s_id` int(11) DEFAULT NULL COMMENT '对应学生详情表中id 唯一标识',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of attendance
@@ -58,6 +58,27 @@ INSERT INTO `attendance` VALUES ('23', '张三', '1899-12-31 00:00:00', '1', nul
 INSERT INTO `attendance` VALUES ('24', '李四', '2019-10-24 15:24:00', '0', null, '2');
 INSERT INTO `attendance` VALUES ('25', '小五', '2019-10-24 15:24:00', '3', null, '3');
 INSERT INTO `attendance` VALUES ('26', '111', '2019-10-24 15:24:00', '1', '2019-10-24 15:24:00', '4');
+INSERT INTO `attendance` VALUES ('27', '张三', '1899-12-31 00:00:00', '1', null, '1');
+INSERT INTO `attendance` VALUES ('28', '李四', '2019-10-24 15:24:00', '0', null, '2');
+INSERT INTO `attendance` VALUES ('29', '小五', '2019-10-24 15:24:00', '3', null, '3');
+INSERT INTO `attendance` VALUES ('30', '111', '2019-10-24 15:24:00', '1', '2019-10-24 15:24:00', '4');
+
+-- ----------------------------
+-- Table structure for note
+-- ----------------------------
+DROP TABLE IF EXISTS `note`;
+CREATE TABLE `note` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `phone` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '手机号',
+  `name` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT '短信内容',
+  `stater` int(11) DEFAULT NULL COMMENT '0为成功/1为失败  发送状态',
+  `template_num` int(11) DEFAULT NULL COMMENT '0为模板一/1为模板二    短信模板',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of note
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for permission
@@ -94,7 +115,7 @@ CREATE TABLE `role` (
   `name` varchar(100) DEFAULT NULL,
   `desc_` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role
@@ -102,6 +123,8 @@ CREATE TABLE `role` (
 INSERT INTO `role` VALUES ('1', 'admin', '超级管理员');
 INSERT INTO `role` VALUES ('2', 'productManager', '产品管理员');
 INSERT INTO `role` VALUES ('3', 'orderManager', '订单管理员');
+INSERT INTO `role` VALUES ('6', 'admin1', 'test');
+INSERT INTO `role` VALUES ('7', 'test', 'test');
 
 -- ----------------------------
 -- Table structure for role_permission
@@ -112,7 +135,7 @@ CREATE TABLE `role_permission` (
   `rid` bigint(20) DEFAULT NULL,
   `pid` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role_permission
@@ -139,6 +162,44 @@ INSERT INTO `role_permission` VALUES ('53', '3', '7');
 INSERT INTO `role_permission` VALUES ('54', '3', '6');
 INSERT INTO `role_permission` VALUES ('55', '3', '1');
 INSERT INTO `role_permission` VALUES ('56', '5', '11');
+INSERT INTO `role_permission` VALUES ('67', '6', '10');
+INSERT INTO `role_permission` VALUES ('68', '6', '9');
+INSERT INTO `role_permission` VALUES ('69', '6', '8');
+INSERT INTO `role_permission` VALUES ('70', '6', '7');
+INSERT INTO `role_permission` VALUES ('71', '6', '6');
+INSERT INTO `role_permission` VALUES ('72', '6', '5');
+INSERT INTO `role_permission` VALUES ('73', '6', '4');
+INSERT INTO `role_permission` VALUES ('74', '6', '3');
+INSERT INTO `role_permission` VALUES ('75', '6', '2');
+INSERT INTO `role_permission` VALUES ('76', '6', '1');
+INSERT INTO `role_permission` VALUES ('77', null, '10');
+INSERT INTO `role_permission` VALUES ('78', null, '9');
+INSERT INTO `role_permission` VALUES ('79', null, '8');
+INSERT INTO `role_permission` VALUES ('80', null, '7');
+INSERT INTO `role_permission` VALUES ('81', null, '6');
+INSERT INTO `role_permission` VALUES ('82', null, '4');
+INSERT INTO `role_permission` VALUES ('83', null, '1');
+INSERT INTO `role_permission` VALUES ('84', null, '10');
+INSERT INTO `role_permission` VALUES ('85', null, '9');
+INSERT INTO `role_permission` VALUES ('86', null, '8');
+INSERT INTO `role_permission` VALUES ('87', null, '7');
+INSERT INTO `role_permission` VALUES ('88', null, '6');
+INSERT INTO `role_permission` VALUES ('89', null, '5');
+INSERT INTO `role_permission` VALUES ('90', null, '4');
+INSERT INTO `role_permission` VALUES ('91', null, '3');
+INSERT INTO `role_permission` VALUES ('92', null, '2');
+INSERT INTO `role_permission` VALUES ('93', null, '1');
+INSERT INTO `role_permission` VALUES ('94', null, '9');
+INSERT INTO `role_permission` VALUES ('95', null, '7');
+INSERT INTO `role_permission` VALUES ('96', null, '5');
+INSERT INTO `role_permission` VALUES ('97', null, '3');
+INSERT INTO `role_permission` VALUES ('98', null, '1');
+INSERT INTO `role_permission` VALUES ('99', null, '7');
+INSERT INTO `role_permission` VALUES ('100', null, '5');
+INSERT INTO `role_permission` VALUES ('109', '7', '10');
+INSERT INTO `role_permission` VALUES ('110', '7', '8');
+INSERT INTO `role_permission` VALUES ('111', '7', '6');
+INSERT INTO `role_permission` VALUES ('112', '7', '4');
 
 -- ----------------------------
 -- Table structure for student_detail
@@ -161,6 +222,21 @@ CREATE TABLE `student_detail` (
 INSERT INTO `student_detail` VALUES ('1', '张三', '北京', 'java', '1566666666', '13799999999', '142222222222222222');
 INSERT INTO `student_detail` VALUES ('2', '李四', '北京', 'h5', '1566666666', '1566666666', '142222222222222222');
 INSERT INTO `student_detail` VALUES ('3', '小五', '北京', 'jsp', '1566666666', '1566666666', '142222222222222222');
+
+-- ----------------------------
+-- Table structure for template
+-- ----------------------------
+DROP TABLE IF EXISTS `template`;
+CREATE TABLE `template` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `template_num` int(11) NOT NULL COMMENT '模板编号  0为模板一/1为模板二',
+  `template` text COLLATE utf8_bin NOT NULL COMMENT '模板内容  ',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of template
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for user
