@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,7 +8,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>深度考勤管理系统</title>
+<title>数据 - AdminLTE2定制版</title>
 <meta name="description" content="AdminLTE2定制版">
 <meta name="keywords" content="AdminLTE2定制版">
 
@@ -81,11 +79,15 @@
 			<!-- 内容头部 -->
 			<section class="content-header">
 			<h1>
-				考勤信息 <small></small>
+				用户管理 <small>全部用户</small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="${pageContext.request.contextPath}/index.jsp"><i
 						class="fa fa-dashboard"></i> 首页</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/admin/listUser">用户管理</a></li>
+
+				<li class="active">全部用户</li>
 			</ol>
 			</section>
 			<!-- 内容头部 /-->
@@ -106,7 +108,7 @@
 							<div class="pull-left">
 								<div class="form-group form-inline">
 									<div class="btn-group">
-										<button type="button" class="btn btn-default" title="新建" onclick="location.href=''">
+										<button type="button" class="btn btn-default" title="新建" onclick="location.href='addUser1'">
 											<i class="fa fa-file-o"></i> 新建
 										</button>
 										
@@ -134,28 +136,30 @@
 											id="selall" type="checkbox" class="icheckbox_square-blue">
 										</th>
 										<th class="sorting_asc">ID</th>
-										<th class="sorting_desc">姓名</th>
-										<th class="sorting_desc">考勤时间</th>
-										<th class="sorting_asc sorting_asc_disabled">考勤状态</th>
-										<th class="sorting_desc">学生班级</th>
-										<th class="sorting_desc">当前时间</th>
+										<th class="sorting_desc">用户名</th>
+										<th class="sorting_desc sorting_desc_disabled">密码</th>
+										<th class="sorting_desc sorting_desc_disabled">加密盐</th>
+										<th class="sorting">角色</th>
 										<th class="text-center">操作</th>
 									</tr>
 								</thead>
 								<tbody>
 
-									<c:forEach items="${attendanceList}" var="as">
+									<c:forEach items="${listUser}" var="u">
 										<tr>
 											<td><input name="ids" type="checkbox"></td>
-											<td>${as.id }</td>
-											<td>${as.name }</td>
-											<td><fmt:formatDate value="${as.attendanceDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-											<td>${as.statusStr}</td>
-											<td>${as.student.stuClass}</td>
-											<td><fmt:formatDate value="${as.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+											<td>${u.id }</td>
+											<td>${u.name }</td>
+											<td>${u.password }</td>
+											<td>${u.salt }</td>
+											<td>
+												<c:forEach items="${user_roles[u]}" var="r">
+													${r.name} <br>
+												</c:forEach>
+											</td>
 											<td class="text-center">
-												<a href="editRole?id=${r.id}" class="btn bg-olive btn-xs">编辑</a>
-												<a href="deleteRole?id=${r.id}" class="btn bg-olive btn-xs">删除</a>
+												<a href="editUser?id=${u.id}" class="btn bg-olive btn-xs">编辑</a>
+												<a href="deleteUser?id=${u.id}" class="btn bg-olive btn-xs">删除</a>
 											</td>
 										</tr>
 									</c:forEach>
@@ -211,9 +215,7 @@
 					<!-- /.box-footer-->
 
 				</div>
-					<shiro:authenticated>
-						<h2 style="color: #9f191f">${result}</h2>
-					</shiro:authenticated>
+
 				</section>
 				<!-- 正文区域 /-->
 
@@ -224,63 +226,63 @@
 			<!-- 底部导航 -->
 			<footer class="main-footer">
 			<div class="pull-right hidden-xs">
-				<b>Version</b> 1.0.8
+				<b>Version</b> 1.0.0
 			</div>
-			<strong>Copyright &copy; 2014-2017 <a
+			<strong>Copyright &copy; 2019-2020 <a
 				href="http://www.itcast.cn">研究院研发部</a>.
 			</strong> All rights reserved. </footer>
 			<!-- 底部导航 /-->
 
 		</div>
 
-	<script src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/jQueryUI/jquery-ui.min.js"></script>
-	<script>
-		$.widget.bridge('uibutton', $.ui.button);
-	</script>
-	<script src="${pageContext.request.contextPath}/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/raphael/raphael-min.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/morris/morris.min.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/sparkline/jquery.sparkline.min.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/knob/jquery.knob.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/daterangepicker/moment.min.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/daterangepicker/daterangepicker.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/daterangepicker/daterangepicker.zh-CN.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/datepicker/bootstrap-datepicker.js"></script>
-	<script
+		<script src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/jQueryUI/jquery-ui.min.js"></script>
+		<script>
+			$.widget.bridge('uibutton', $.ui.button);
+		</script>
+		<script src="${pageContext.request.contextPath}/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/raphael/raphael-min.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/morris/morris.min.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/sparkline/jquery.sparkline.min.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/knob/jquery.knob.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/daterangepicker/moment.min.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/daterangepicker/daterangepicker.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/daterangepicker/daterangepicker.zh-CN.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/datepicker/bootstrap-datepicker.js"></script>
+		<script
 			src="${pageContext.request.contextPath}/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
-	<script
+		<script
 			src="${pageContext.request.contextPath}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/fastclick/fastclick.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/iCheck/icheck.min.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/adminLTE/js/app.min.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/treeTable/jquery.treetable.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/select2/select2.full.min.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
-	<script
+		<script src="${pageContext.request.contextPath}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/fastclick/fastclick.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/iCheck/icheck.min.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/adminLTE/js/app.min.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/treeTable/jquery.treetable.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/select2/select2.full.min.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+		<script
 			src="${pageContext.request.contextPath}/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.zh-CN.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/bootstrap-markdown/js/bootstrap-markdown.js"></script>
-	<script
+		<script src="${pageContext.request.contextPath}/plugins/bootstrap-markdown/js/bootstrap-markdown.js"></script>
+		<script
 			src="${pageContext.request.contextPath}/plugins/bootstrap-markdown/locale/bootstrap-markdown.zh.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/bootstrap-markdown/js/markdown.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/bootstrap-markdown/js/to-markdown.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/ckeditor/ckeditor.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/input-mask/jquery.inputmask.js"></script>
-	<script
+		<script src="${pageContext.request.contextPath}/plugins/bootstrap-markdown/js/markdown.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/bootstrap-markdown/js/to-markdown.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/ckeditor/ckeditor.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/input-mask/jquery.inputmask.js"></script>
+		<script
 			src="${pageContext.request.contextPath}/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/input-mask/jquery.inputmask.extensions.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/datatables/jquery.dataTables.min.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/datatables/dataTables.bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/chartjs/Chart.min.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/flot/jquery.flot.min.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/flot/jquery.flot.resize.min.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/flot/jquery.flot.pie.min.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/flot/jquery.flot.categories.min.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.min.js"></script>
-	<script src="${pageContext.request.contextPath}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/datatables/jquery.dataTables.min.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/datatables/dataTables.bootstrap.min.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/chartjs/Chart.min.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/flot/jquery.flot.min.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/flot/jquery.flot.resize.min.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/flot/jquery.flot.pie.min.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/flot/jquery.flot.categories.min.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.min.js"></script>
+		<script src="${pageContext.request.contextPath}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
 		<script>
 			$(document).ready(function() {
 				// 选择框

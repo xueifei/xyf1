@@ -4,12 +4,12 @@ import lombok.Data;
 
 //学生详情
 @Data
-public class Student {
+public class StudentDetail {
     private Integer id;
     private String name;
     private String address;
     private String stuClass;
     private String phone;
     private String parentPhone;
-    private String identity;
+    private String identity;//身份证号
 }

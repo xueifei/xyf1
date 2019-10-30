@@ -187,6 +187,7 @@
 					<div class="box-footer">
 						<div class="pull-left">
 							<div class="form-group form-inline">
+<<<<<<< HEAD
 								总共${listUser.pages}页，共${listUser.total} 条数据。 每页
 								<select class="form-control" name="changePageSize" id="changePageSize" onchange="changePageSize()">
 									<option >1</option>
@@ -194,6 +195,14 @@
 									<option >3</option>
 									<option >4</option>
 									<option >5</option>
+=======
+								总共${listUser.pages}页，共${listUser.total} 条数据。 每页 <select class="form-control">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+>>>>>>> 550343d377aca7efa011bf403d868c6c56758190
 								</select> 条
 							</div>
 						</div>
@@ -203,10 +212,17 @@
 								<li><a href="${pageContext.request.contextPath}/admin/listUser?page=1&size=${listUser.pageSize}" aria-label="Previous">首页</a></li>
 								<li><a href="${pageContext.request.contextPath}/admin/listUser?page=${listUser.pageNum-1}&size=${listUser.pageSize}">上一页</a></li>
 								<c:forEach begin="1" end="${listUser.pages}" var="pageNum">
+<<<<<<< HEAD
 								<li><a href="${pageContext.request.contextPath}/admin/listUser?page=${pageNum}&size=${listUser.pageSize}">${pageNum}</a></li>
 								</c:forEach>
 								<li><a href="${pageContext.request.contextPath}/admin/listUser?page=${listUser.pageNum+1}&size=${listUser.pageSize}">下一页</a></li>
 								<li><a href="${pageContext.request.contextPath}/admin/listUser?page=${listUser.pages}&size=${listUser.pageSize}" aria-label="Next">尾页</a></li>
+=======
+								<li><a href="${pageContext.request.contextPath}/admin/listUser?page=${pageNum}$size=${listUser.pageSize}">${pageNum}</a></li>
+								</c:forEach>
+								<li><a href="${pageContext.request.contextPath}/admin/listUser?page=${listUser.pageNum+1}$size=${listUser.pageSize}">下一页</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/listUser?page=${listUser.pages}$size=${listUser.pageSize}" aria-label="Next">尾页</a></li>
+>>>>>>> 550343d377aca7efa011bf403d868c6c56758190
 							</ul>
 						</div>
 
@@ -285,11 +301,19 @@
 		<script>
 			function changePageSize() {
 				//获取下拉框的值
+<<<<<<< HEAD
 				var size = $("#changePageSize").val();
 
 				//向服务器发送请求，改变没页显示条数
 				location.href = "${pageContext.request.contextPath}/admin/listUser?page=1&size="
 						+ size;
+=======
+				var pageSize = $("#changePageSize").val();
+
+				//向服务器发送请求，改变没页显示条数
+				location.href = "${pageContext.request.contextPath}/admin/listUser?page=1&pageSize="
+						+ pageSize;
+>>>>>>> 550343d377aca7efa011bf403d868c6c56758190
 			}
 			$(document).ready(function() {
 				// 选择框

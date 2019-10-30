@@ -22,9 +22,14 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<User> listUser(int page, int size) {
 		//参数pageNum 是页码值   参数pageSize 代表是每页显示条数
 		PageHelper.startPage(page, size);
+=======
+	public List<User> listUser(int page,int size) {
+		PageHelper.startPage(page,size);
+>>>>>>> 550343d377aca7efa011bf403d868c6c56758190
 		return userDao.selectUserList();
 	}
 

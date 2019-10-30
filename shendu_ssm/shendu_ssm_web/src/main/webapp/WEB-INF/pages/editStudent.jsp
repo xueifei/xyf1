@@ -85,32 +85,51 @@
 				<li><a href="${pageContext.request.contextPath}/index.jsp"><i
 						class="fa fa-dashboard"></i> 首页</a></li>
 				<li><a
-					href="${pageContext.request.contextPath}/admin/listUser">用户管理</a></li>
-				<li class="active">用户表单</li>
+					href="${pageContext.request.contextPath}/student/findAll">学生详细信息</a></li>
+				<li class="active">学生信息表单</li>
 			</ol>
 			</section>
 			<!-- 内容头部 /-->
 
-			<form action="addUser"
+			<form action="${pageContext.request.contextPath}/student/updateStu"
 				method="post">
 				<!-- 正文区域 -->
 				<section class="content"> <!--产品信息-->
 
 				<div class="panel panel-default">
-					<div class="panel-heading">用户信息</div>
+					<div class="panel-heading">学生信息</div>
 					<div class="row data-type">
 
-						<div class="col-md-2 title">用户名称</div>
+						<div class="col-md-2 title">姓名</div>
 						<div class="col-md-4 data">
 							<input type="text" class="form-control" name="name"
-								placeholder="用户名称" value="">
+								placeholder="姓名" value="${student.name}">
 						</div>
-						<div class="col-md-2 title">密码</div>
+						<div class="col-md-2 title">地址</div>
 						<div class="col-md-4 data">
-							<input type="password" class="form-control" name="password"
-								placeholder="密码" value="">
+							<input type="test" class="form-control" name="address"
+								placeholder="地址" value="${student.address}">
 						</div>
-
+						<div class="col-md-2 title">班级</div>
+						<div class="col-md-4 data">
+							<input type="test" class="form-control" name="stuClass"
+								   placeholder="班级" value="${student.stuClass}">
+						</div>
+						<div class="col-md-2 title">本人手机号</div>
+						<div class="col-md-4 data">
+							<input type="test" class="form-control" name="phone"
+								   placeholder="本人手机号" value="${student.phone}">
+						</div>
+						<div class="col-md-2 title">家长手机号</div>
+						<div class="col-md-4 data">
+							<input type="test" class="form-control" name="parentPhone"
+								   placeholder="家长手机号" value="${student.parentPhone}">
+						</div>
+						<div class="col-md-2 title">身份证号</div>
+						<div class="col-md-4 data">
+							<input type="test" class="form-control" name="identity"
+								   placeholder="身份证号" value="${student.identity}">
+						</div>
 
 					</div>
 				</div>
