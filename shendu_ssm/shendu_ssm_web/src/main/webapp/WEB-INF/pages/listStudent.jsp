@@ -107,7 +107,7 @@
 							<div class="pull-left">
 								<div class="form-group form-inline">
 									<div class="btn-group">
-										<button type="button" class="btn btn-default" title="新建" onclick="location.href='addStudent'">
+										<button type="button" class="btn btn-default" title="新建" onclick="location.href='addStu1'">
 											<i class="fa fa-file-o"></i> 新建
 										</button>
 										
@@ -146,7 +146,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${list}" var="s">
+									<c:forEach items="${listStu.list}" var="s">
 										<tr>
 											<td><input name="ids" type="checkbox" value="${s.id}"></td>
 											<td>${s.id }</td>
@@ -214,7 +214,9 @@
 					<div class="box-footer">
 						<div class="pull-left">
 							<div class="form-group form-inline">
-								总共2 页，共14 条数据。 每页 <select class="form-control">
+								总共${listStu.pages}页，共${listStu.total}条数据。 每页
+								<select class="form-control"  id="changePageSize" onchange="changePageSize()">
+									<option>${listStu.size}</option>
 									<option>1</option>
 									<option>2</option>
 									<option>3</option>
@@ -226,15 +228,13 @@
 
 						<div class="box-tools pull-right">
 							<ul class="pagination">
-								<li><a href="#" aria-label="Previous">首页</a></li>
-								<li><a href="#">上一页</a></li>
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">下一页</a></li>
-								<li><a href="#" aria-label="Next">尾页</a></li>
+								<li><a href="${pageContext.request.contextPath}/student/findAll?page=1&size=${listStu.pageSize}" aria-label="Previous">首页</a></li>
+								<li><a href="${pageContext.request.contextPath}/student/findAll?page=${listStu.pageNum-1}&size=${listStu.pageSize}">上一页</a></li>
+								<c:forEach begin="1" end="${listStu.pages}" var="pageNum">
+									<li><a href="${pageContext.request.contextPath}/student/findAll?page=${pageNum}&size=${listStu.pageSize}">${pageNum}</a></li>
+								</c:forEach>
+								<li><a href="${pageContext.request.contextPath}/student/findAll?page=${listStu.pageNum+1}&size=${listStu.pageSize}">下一页</a></li>
+								<li><a href="${pageContext.request.contextPath}/student/findAll?page=${listStu.pages}&size=${listStu.pageSize}" aria-label="Next">尾页</a></li>
 							</ul>
 						</div>
 
@@ -312,6 +312,14 @@
 	<script src="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.min.js"></script>
 	<script src="${pageContext.request.contextPath}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
 		<script>
+			function changePageSize() {
+				//获取下拉框的值
+				var size = $("#changePageSize").val();
+
+				//向服务器发送请求，改变没页显示条数
+				location.href = "${pageContext.request.contextPath}/student/findAll?page=1&size="
+						+ size;
+			}
 			$(document).ready(function() {
 				// 选择框
 				$(".select2").select2();
