@@ -30,7 +30,7 @@ public class AttendanceController {
         List<Attendance> attendances1 = attendanceService.findStuClassByList( attendances);
         modelAndView.addObject("attendanceList",attendances1);
         modelAndView.addObject("result",i>0?"上传成功":"上传失败");
-        modelAndView.setViewName("attendance");
+        modelAndView.setViewName("uploadAttendance");
         return modelAndView;
     }
 
