@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -104,7 +105,7 @@
 							<div class="pull-left">
 								<div class="form-group form-inline">
 									<div class="btn-group">
-										<button type="button" class="btn btn-default" title="新建" onclick="location.href='addRole1'">
+										<button type="button" class="btn btn-default" title="新建" onclick="location.href='/student'">
 											<i class="fa fa-file-o"></i> 新建
 										</button>
 										
@@ -147,13 +148,13 @@
 											<td><input name="ids" type="checkbox"></td>
 											<td>${as.id }</td>
 											<td>${as.name }</td>
-											<td>${as.attendanceDate}</td>
+											<td><fmt:formatDate value="${as.attendanceDate}" pattern="yyyy-MM-dd HH:mm"/></td>
 											<td>${as.statusStr}</td>
-											<td>${as.SId}</td>
-											<td>${as.createDate}</td>
+											<td>${as.student.stuClass}</td>
+											<td><fmt:formatDate value="${as.createDate}" pattern="yyyy-MM-dd HH:mm"/></td>
 											<td class="text-center">
-												<a href="editRole?id=${r.id}" class="btn bg-olive btn-xs">编辑</a>
-												<a href="deleteRole?id=${r.id}" class="btn bg-olive btn-xs">删除角色</a>
+												<a href="${pageContext.request.contextPath}/student/editStu?id=${as.id}" class="btn bg-olive btn-xs">编辑</a>
+												<a href="${pageContext.request.contextPath}/student/editStu?id=${as.id}" class="btn bg-olive btn-xs">删除角色</a>
 											</td>
 										</tr>
 									</c:forEach>

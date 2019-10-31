@@ -23,6 +23,12 @@ public class StudentDetailController {
     public String addStu(StudentDetail studentDetail, Model model){
         boolean isTrue = studentDetailService.addStu(studentDetail);
         model.addAttribute("mess",isTrue?"添加成功":"添加失败");
+        return "redirect:findAll";
+    }
+    //跳转新增页面
+    @RequestMapping("/addStudent")
+    public String addStudent(){
+
         return "addStudent";
     }
 
@@ -30,7 +36,7 @@ public class StudentDetailController {
     public String updateStu(StudentDetail studentDetail, Model model){
         boolean isTrue = studentDetailService.updateStu(studentDetail);
         model.addAttribute("mess",isTrue?"修改成功":"修改失败");
-        return "editStutent";
+        return "redirect:findAll";
     }
 
     //批量修改学生班级
@@ -47,7 +53,7 @@ public class StudentDetailController {
     public String deleteStu(Integer id, Model model){
         boolean isTrue = studentDetailService.deleteStu(id);
         model.addAttribute("mess",isTrue?"删除成功":"删除失败");
-        return "listStudent";
+        return "redirect:findAll";
     }
 
     @RequestMapping("/findAll")

@@ -85,13 +85,13 @@
 				<li><a href="${pageContext.request.contextPath}/index.jsp"><i
 						class="fa fa-dashboard"></i> 首页</a></li>
 				<li><a
-					href="${pageContext.request.contextPath}/student/findAll">学生详细信息</a></li>
+					href="${pageContext.request.contextPath}/student/addStu">学生详细信息</a></li>
 				<li class="active">学生信息表单</li>
 			</ol>
 			</section>
 			<!-- 内容头部 /-->
 
-			<form action="${pageContext.request.contextPath}/student/updateStu"
+			<form action="${pageContext.request.contextPath}/student/addStu"
 				method="post">
 				<!-- 正文区域 -->
 				<section class="content"> <!--产品信息-->
@@ -103,36 +103,35 @@
 						<div class="col-md-2 title">姓名</div>
 						<div class="col-md-4 data">
 							<input type="text" class="form-control" name="name"
-								placeholder="姓名" value="${student.name}">
+								placeholder="姓名" value="">
 						</div>
 						<div class="col-md-2 title">地址</div>
 						<div class="col-md-4 data">
 							<input type="test" class="form-control" name="address"
-								placeholder="地址" value="${student.address}">
+								placeholder="地址" value="">
 						</div>
 						<div class="col-md-2 title">班级</div>
 						<div class="col-md-4 data">
 							<input type="test" class="form-control" name="stuClass"
-								   placeholder="班级" value="${student.stuClass}">
+								   placeholder="班级" value="">
 						</div>
 						<div class="col-md-2 title">本人手机号</div>
 						<div class="col-md-4 data">
 							<input type="test" class="form-control" name="phone"
-								   placeholder="本人手机号" value="${student.phone}">
+								   placeholder="本人手机号" value="">
 						</div>
 						<div class="col-md-2 title">家长手机号</div>
 						<div class="col-md-4 data">
 							<input type="test" class="form-control" name="parentPhone"
-								   placeholder="家长手机号" value="${student.parentPhone}">
+								   placeholder="家长手机号" value="">
 						</div>
 						<div class="col-md-2 title">身份证号</div>
 						<div class="col-md-4 data">
 							<input type="test" class="form-control" name="identity"
-								   placeholder="身份证号" value="${student.identity}">
+								   placeholder="身份证号" value="">
 						</div>
 					</div>
 				</div>
-					<input type="hidden" name="id" value="${student.id}">
 				<!--订单信息/--> <!--工具栏-->
 				<div class="box-tools text-center">
 					<button type="submit" class="btn bg-maroon">保存</button>

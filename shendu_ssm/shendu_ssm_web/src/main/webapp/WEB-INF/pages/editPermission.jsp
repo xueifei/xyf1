@@ -118,6 +118,7 @@
 
 					</div>
 				</div>
+					<input type="hidden" name="id" value="${permission.id}">
 				<!--订单信息/--> <!--工具栏-->
 				<div class="box-tools text-center">
 					<button type="submit" class="btn bg-maroon">保存</button>

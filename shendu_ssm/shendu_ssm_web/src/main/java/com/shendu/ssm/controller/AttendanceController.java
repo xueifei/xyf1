@@ -21,13 +21,14 @@ public class AttendanceController {
     @Autowired
     private AttendanceService attendanceService;
 
+
     @RequestMapping(value="/upload",method = RequestMethod.POST)
     public ModelAndView upload(@RequestParam(value="file",required = false) MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         ModelAndView modelAndView = new ModelAndView();
         List<Attendance> attendances = attendanceService.readExcelFile(file);
         int i = attendanceService.insertInfoBatch(attendances);
-
-        modelAndView.addObject("attendanceList",attendances);
+        List<Attendance> attendances1 = attendanceService.findStuClassByList( attendances);
+        modelAndView.addObject("attendanceList",attendances1);
         modelAndView.addObject("result",i>0?"上传成功":"上传失败");
         modelAndView.setViewName("attendance");
         return modelAndView;
