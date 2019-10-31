@@ -1,5 +1,6 @@
 package com.shendu.ssm.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.shendu.ssm.domain.StudentDetail;
 import com.shendu.ssm.service.StudentDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
+
 import java.util.List;
 
 @Controller
@@ -57,9 +58,11 @@ public class StudentDetailController {
     }
 
     @RequestMapping("/findAll")
-    public String findAll(Model model){
-        List<StudentDetail> list = studentDetailService.findAll();
-        model.addAttribute("list",list);
+    public String findAll(Model model,@RequestParam(name = "page", required = true, defaultValue = "1") int page, @RequestParam(name = "size", required = true, defaultValue = "4") int size) {
+        List<StudentDetail> list = studentDetailService.findAll(page, size);
+        //PageInfo就是一个分页Bean
+        PageInfo listStu=new PageInfo(list);
+        model.addAttribute("listStu",listStu);
         return "listStudent";
     }
 
@@ -70,7 +73,6 @@ public class StudentDetailController {
     public String edit(Model model, Integer id) {
         StudentDetail studentDetail = studentDetailService.findById(id);
         model.addAttribute("student", studentDetail);
-
 
         return "editStudent";
     }

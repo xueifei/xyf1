@@ -85,7 +85,7 @@
 				<li><a href="${pageContext.request.contextPath}/index.jsp"><i
 						class="fa fa-dashboard"></i> 首页</a></li>
 				<li><a
-					href="${pageContext.request.contextPath}/student/addStu">学生详细信息</a></li>
+					href="${pageContext.request.contextPath}/student/findAll">学生详细信息</a></li>
 				<li class="active">学生信息表单</li>
 			</ol>
 			</section>

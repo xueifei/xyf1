@@ -1,5 +1,6 @@
 package com.shendu.ssm.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.shendu.ssm.domain.StudentDetail;
 import com.shendu.ssm.mapper.StudentDetailDao;
 import com.shendu.ssm.service.StudentDetailService;
@@ -51,9 +52,10 @@ public class StudentDetailServiceImpl implements StudentDetailService {
     }
 
     @Override
-    public List<StudentDetail> findAll() {
-        List<StudentDetail> list = studentDetailDao.findAll();
-        return list;
+    public List<StudentDetail> findAll(int page ,int size) {
+        //参数pageNum 是页码值   参数pageSize 代表是每页显示条数
+        PageHelper.startPage(page, size);
+        return studentDetailDao.findAll();
     }
 
     @Override

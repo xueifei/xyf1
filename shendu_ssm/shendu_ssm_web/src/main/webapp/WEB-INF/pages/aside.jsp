@@ -70,11 +70,11 @@
 							<i class="fa fa-circle-o"></i> 考勤信息
 					</a></li>
 					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/student/findAll?page=1&size=4"> <i
+						href="${pageContext.request.contextPath}/student/findAll"> <i
 							class="fa fa-circle-o"></i>学生详细信息
 					</a></li>
 					<li id="system-setting"><a
-							href="${pageContext.request.contextPath}/student/findAll?page=1&size=4"> <i
+							href="${pageContext.request.contextPath}/student/findAll"> <i
 							class="fa fa-circle-o"></i>短信记录
 					</a></li>
 					<li id="system-setting">
