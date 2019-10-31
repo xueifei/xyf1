@@ -1,5 +1,6 @@
 package com.shendu.ssm.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.shendu.ssm.domain.StudentDetail;
 import com.shendu.ssm.service.StudentDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class StudentDetailController {
     public String updateStu(StudentDetail studentDetail, Model model){
         boolean isTrue = studentDetailService.updateStu(studentDetail);
         model.addAttribute("mess",isTrue?"修改成功":"修改失败");
-        return "editStutent";
+        return "redirect:listStudent";
     }
 
     //批量修改学生班级
@@ -50,9 +51,11 @@ public class StudentDetailController {
     }
 
     @RequestMapping("/findAll")
-    public String findAll(Model model){
-        List<StudentDetail> list = studentDetailService.findAll();
-        model.addAttribute("list",list);
+    public String findAll(Model model,@RequestParam(name = "page", required = true, defaultValue = "1") int page, @RequestParam(name = "size", required = true, defaultValue = "4") int size) {
+        List<StudentDetail> list = studentDetailService.findAll(page,size);
+        //PageInfo就是一个分页Bean
+        PageInfo listStu=new PageInfo(list);
+        model.addAttribute("listStu",listStu);
         return "listStudent";
     }
 
@@ -63,7 +66,6 @@ public class StudentDetailController {
     public String edit(Model model, Integer id) {
         StudentDetail studentDetail = studentDetailService.findById(id);
         model.addAttribute("student", studentDetail);
-
 
         return "editStudent";
     }
