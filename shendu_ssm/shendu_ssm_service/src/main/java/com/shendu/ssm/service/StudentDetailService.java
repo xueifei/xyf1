@@ -11,5 +11,5 @@ public interface StudentDetailService {
     public List<StudentDetail> findAll();
     public StudentDetail findById(Integer id);
 
-    boolean updateStuClassBatch( String stuClass,Integer[] ids);
+    boolean updateStuClassBatch( String stuClass,String[] ids);
 }

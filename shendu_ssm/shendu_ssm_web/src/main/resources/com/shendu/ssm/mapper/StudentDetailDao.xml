@@ -19,10 +19,10 @@
     <select id="findById" resultType="com.shendu.ssm.domain.StudentDetail">
         select * from student_detail where  id = #{id}
     </select>
-    <update id="updateStuClassBatch">
-        update student_detail set stu_class = #{stuClass} where id in
+    <update id="updateStuClassBatch" parameterType="java.util.Map">
+        update student_detail set stu_class = #{stuClass,jdbcType=VARCHAR} where id in
         <foreach collection="list" item="id" open="(" close=")" separator="," >
-            #{id}
+            #{id,jdbcType=INTEGER}
         </foreach>
     </update>
 </mapper>

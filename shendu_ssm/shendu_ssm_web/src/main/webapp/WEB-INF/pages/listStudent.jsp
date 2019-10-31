@@ -89,8 +89,7 @@
 			</ol>
 			</section>
 			<!-- 内容头部 /-->
-			<form action="${pageContext.request.contextPath}/student/updateStuClassBatch"
-				  method="post">
+
 				<!-- 正文区域 -->
 				<section class="content"> <!-- .box-body -->
 				<div class="box box-primary">
@@ -126,14 +125,15 @@
 								</div>
 							</div>
 							<!--工具栏/-->
-
+							<form action="${pageContext.request.contextPath}/student/updateStuClassBatch"
+								  method="post">
 							<!--数据列表-->
 							<table id="dataList"
 								class="table table-bordered table-striped table-hover dataTable">
 								<thead>
 									<tr>
 										<th class="" style="padding-right: 0px"><input
-											id="selall" type="checkbox" class="icheckbox_square-blue">
+											id="selall" type="checkbox" class="icheckbox_square-blue" >
 										</th>
 										<th class="sorting_asc">ID</th>
 										<th class="sorting_desc">姓名</th>
@@ -175,7 +175,29 @@
                             </tfoot>-->
 							</table>
 							<!--数据列表/-->
+								<div class="panel panel-default">
+									<div class="panel-heading">批量修改班级</div>
+									<div class="row data-type">
 
+										<div class="col-md-2 title">请选中需要修改班级的学生</div>
+										<div class="col-md-4 data">
+											<input type="text"  name="stuClass" class="form-control" placeholder="请输入班级名称">
+
+										</div>
+										<shiro:authenticated>
+											<div class="col-md-4 data">
+												<h2 style="color: #9f191f">${mess}</h2>
+											</div>
+										</shiro:authenticated>
+									</div>
+								</div>
+								<!--订单信息/--> <!--工具栏-->
+								<div class="box-tools text-center">
+									<button type="submit" class="btn bg-maroon" >全部修改</button>
+									<button type="button" class="btn bg-default"
+											onclick="history.back(-1);">返回</button>
+								</div>
+							</form>
 						</div>
 						<!-- 数据表格 /-->
 
@@ -186,7 +208,7 @@
 
 					<!-- /.box-body -->
 					<shiro:authenticated>
-						<div class="box box-primary">${result} ${mess}</div>
+						<div class="box box-primary">${result} </div>
 					</shiro:authenticated>
 					<!-- .box-footer-->
 					<div class="box-footer">
@@ -222,23 +244,7 @@
 
 
 
-				<div class="panel panel-default">
-					<div class="panel-heading">批量修改班级</div>
-					<div class="row data-type">
 
-						<div class="col-md-2 title">请选中需要修改班级的学生</div>
-						<div class="col-md-4 data">
-							<input type="text"  name="stuClass" class="form-control" placeholder="请输入班级名称">
-						</div>
-					</div>
-				</div>
-				<!--订单信息/--> <!--工具栏-->
-				<div class="box-tools text-center">
-					<button type="submit" class="btn bg-maroon" >全部修改</button>
-					<button type="button" class="btn bg-default"
-							onclick="history.back(-1);">返回</button>
-				</div>
-			</form>
 			</section>
 			<!-- 正文区域 /-->
 		</div>

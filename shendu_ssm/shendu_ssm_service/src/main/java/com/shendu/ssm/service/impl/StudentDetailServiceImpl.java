@@ -3,6 +3,7 @@ package com.shendu.ssm.service.impl;
 import com.shendu.ssm.domain.StudentDetail;
 import com.shendu.ssm.mapper.StudentDetailDao;
 import com.shendu.ssm.service.StudentDetailService;
+import org.apache.commons.beanutils.ConvertUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,9 +63,10 @@ public class StudentDetailServiceImpl implements StudentDetailService {
     }
 
     @Override
-    public boolean updateStuClassBatch(String stuClass,Integer[] ids ) {
+    public boolean updateStuClassBatch(String stuClass,String[] ids ) {
         try{
-            studentDetailDao.updateStuClassBatch(stuClass,ids);
+            Integer[] ids1 = (Integer[]) ConvertUtils.convert(ids, Integer.class);
+            studentDetailDao.updateStuClassBatch(stuClass,ids1);
             return true;
         }catch(Exception e){
             e.printStackTrace();

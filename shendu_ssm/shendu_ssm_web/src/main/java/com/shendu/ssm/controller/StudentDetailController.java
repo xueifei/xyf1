@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -34,9 +35,9 @@ public class StudentDetailController {
 
     //批量修改学生班级
     @RequestMapping(value = "/updateStuClassBatch",method = {RequestMethod.POST})
-    public String updateStuClassBatch(  String stuClass, Integer[] ids ){
-        Integer[] ids1 = {1,2,3};
-        boolean isTrue = studentDetailService.updateStuClassBatch(stuClass,ids1);
+    public String updateStuClassBatch( @RequestParam("stuClass") String stuClass,@RequestParam("ids") String[] ids ){
+
+        boolean isTrue = studentDetailService.updateStuClassBatch(stuClass,ids);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("mess",isTrue?"修改成功":"修改失败");
         return "redirect:findAll";
