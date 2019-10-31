@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -79,7 +81,7 @@
 			<!-- 内容头部 -->
 			<section class="content-header">
 			<h1>
-				Excel上传 <small></small>
+				学生详细信息 <small></small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="${pageContext.request.contextPath}/index.jsp"><i
@@ -87,7 +89,8 @@
 			</ol>
 			</section>
 			<!-- 内容头部 /-->
-
+			<form action="${pageContext.request.contextPath}/student/updateStuClassBatch"
+				  method="post">
 				<!-- 正文区域 -->
 				<section class="content"> <!-- .box-body -->
 				<div class="box box-primary">
@@ -97,51 +100,148 @@
 
 					<div class="box-body">
 
+
 						<!-- 数据表格 -->
-						<form action="${pageContext.request.contextPath}/attendance/upload" enctype="multipart/form-data" id="makes"
-							  method="post">
-							<!-- 正文区域 -->
-							<section class="content"> <!--产品信息-->
+						<div class="table-box">
 
-								<div class="panel panel-default">
-									<div class="panel-heading">选择文件</div>
-									<div class="row data-type">
-
-										<div class="col-md-2 title"></div>
-										<div class="col-md-4 data">
-											<input type="file" id="excelFile" name="file" class="form-control">
-										</div>
-
-
-
+							<!--工具栏-->
+							<div class="pull-left">
+								<div class="form-group form-inline">
+									<div class="btn-group">
+										<button type="button" class="btn btn-default" title="新建" onclick="location.href='addStudent'">
+											<i class="fa fa-file-o"></i> 新建
+										</button>
+										
+										<button type="button" class="btn btn-default" title="刷新">
+											<i class="fa fa-refresh"></i> 刷新
+										</button>
 									</div>
 								</div>
-								<!--订单信息/--> <!--工具栏-->
-								<div class="box-tools text-center">
-									<button type="submit" class="btn bg-maroon" οnclick="importExc()">上传</button>
-									<button type="button" class="btn bg-default"
-											onclick="history.back(-1);">返回</button>
+							</div>
+							<div class="box-tools pull-right">
+								<div class="has-feedback">
+									<input type="text" class="form-control input-sm"
+										placeholder="搜索"> <span
+										class="glyphicon glyphicon-search form-control-feedback"></span>
 								</div>
-								<!--工具栏/--> </section>
-							<!-- 正文区域 /-->
-						</form>
+							</div>
+							<!--工具栏/-->
+
+							<!--数据列表-->
+							<table id="dataList"
+								class="table table-bordered table-striped table-hover dataTable">
+								<thead>
+									<tr>
+										<th class="" style="padding-right: 0px"><input
+											id="selall" type="checkbox" class="icheckbox_square-blue">
+										</th>
+										<th class="sorting_asc">ID</th>
+										<th class="sorting_desc">姓名</th>
+										<th class="sorting_desc">地址</th>
+										<th class="sorting_asc sorting_asc_disabled">班级</th>
+										<th class="sorting_desc">本人手机号</th>
+										<th class="sorting_desc">家长手机号</th>
+										<th class="text-center">身份证号</th>
+										<th class="text-center">操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${list}" var="s">
+										<tr>
+											<td><input name="ids" type="checkbox" value="${s.id}"></td>
+											<td>${s.id }</td>
+											<td>${s.name }</td>
+											<td>${s.address}</td>
+											<td>${s.stuClass}</td>
+											<td>${s.phone}</td>
+											<td>${s.parentPhone}</td>
+											<td>${s.identity}</td>
+											<td class="text-center">
+												<a href="${pageContext.request.contextPath}/student/editStu?id=${s.id}" class="btn bg-olive btn-xs">编辑</a>
+												<a href="${pageContext.request.contextPath}/student/deleteStu?id=${s.id}" class="btn bg-olive btn-xs">删除</a>
+											</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+								<!--
+                            <tfoot>
+                            <tr>
+                            <th>Rendering engine</th>
+                            <th>Browser</th>
+                            <th>Platform(s)</th>
+                            <th>Engine version</th>
+                            <th>CSS grade</th>
+                            </tr>
+                            </tfoot>-->
+							</table>
 							<!--数据列表/-->
 
-					</div>
+						</div>
 						<!-- 数据表格 /-->
 
+
+					</div>
 				</div>
+
+
 					<!-- /.box-body -->
+					<shiro:authenticated>
+						<div class="box box-primary">${result} ${mess}</div>
+					</shiro:authenticated>
+					<!-- .box-footer-->
+					<div class="box-footer">
+						<div class="pull-left">
+							<div class="form-group form-inline">
+								总共2 页，共14 条数据。 每页 <select class="form-control">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+								</select> 条
+							</div>
+						</div>
 
+						<div class="box-tools pull-right">
+							<ul class="pagination">
+								<li><a href="#" aria-label="Previous">首页</a></li>
+								<li><a href="#">上一页</a></li>
+								<li><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#">下一页</a></li>
+								<li><a href="#" aria-label="Next">尾页</a></li>
+							</ul>
+						</div>
 
+					</div>
 					<!-- /.box-footer-->
 
 
 
-				</section>
-				<!-- 正文区域 /-->
 
-			</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">批量修改班级</div>
+					<div class="row data-type">
+
+						<div class="col-md-2 title">请选中需要修改班级的学生</div>
+						<div class="col-md-4 data">
+							<input type="text"  name="stuClass" class="form-control" placeholder="请输入班级名称">
+						</div>
+					</div>
+				</div>
+				<!--订单信息/--> <!--工具栏-->
+				<div class="box-tools text-center">
+					<button type="submit" class="btn bg-maroon" >全部修改</button>
+					<button type="button" class="btn bg-default"
+							onclick="history.back(-1);">返回</button>
+				</div>
+			</form>
+			</section>
+			<!-- 正文区域 /-->
+		</div>
 			<!-- @@close -->
 			<!-- 内容区域 /-->
 
@@ -155,7 +255,7 @@
 			</strong> All rights reserved. </footer>
 			<!-- 底部导航 /-->
 
-		</div>
+	</div>
 
 	<script src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<script src="${pageContext.request.contextPath}/plugins/jQueryUI/jquery-ui.min.js"></script>
@@ -206,23 +306,6 @@
 	<script src="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.min.js"></script>
 	<script src="${pageContext.request.contextPath}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
 		<script>
-			function importExc() {
-				var formData = new FormData();
-				//检验导入的文件是否为Excel文件
-				var uploadFile = document.getElementById("excelFile").value;
-				formData.append("excelFile",$("#excelFile")[0].files[0]);
-				formData.append("name",uploadFile);
-				if(uploadFile == null || uploadFile == ''){
-					layer.msg("请选择要上传的Excel文件");
-					return false;
-				}else{
-					var fileExtend = uploadFile.substring(uploadFile.lastIndexOf('.')).toLowerCase();
-					if(fileExtend == '.xls'){
-					}else{
-						layer.msg("文件格式需为'.xls'格式");
-						return false;
-					}
-				}
 			$(document).ready(function() {
 				// 选择框
 				$(".select2").select2();
