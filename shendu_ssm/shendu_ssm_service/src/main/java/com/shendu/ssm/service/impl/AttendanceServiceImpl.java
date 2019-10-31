@@ -1,6 +1,5 @@
 package com.shendu.ssm.service.impl;
 
-import com.github.pagehelper.PageHelper;
 import com.shendu.ssm.domain.Attendance;
 
 import com.shendu.ssm.mapper.AttendanceDao;
@@ -29,11 +28,8 @@ public class AttendanceServiceImpl implements AttendanceService {
         //至此已经将excel中的数据转换到list里面了,接下来就可以操作list,可以进行保存到数据库,或者其他操作,  
         //和你具体业务有关,这里不做具体的示范  
 
-
-        return null;
+        return attendanceList;
     }
-
-
 
     @Override
     public int insertInfoBatch(List<Attendance> attendanceList) {

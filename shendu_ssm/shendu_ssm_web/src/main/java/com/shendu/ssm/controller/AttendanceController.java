@@ -26,6 +26,7 @@ public class AttendanceController {
         ModelAndView modelAndView = new ModelAndView();
         List<Attendance> attendances = attendanceService.readExcelFile(file);
         int i = attendanceService.insertInfoBatch(attendances);
+
         modelAndView.addObject("attendanceList",attendances);
         modelAndView.addObject("result",i>0?"上传成功":"上传失败");
         modelAndView.setViewName("attendance");

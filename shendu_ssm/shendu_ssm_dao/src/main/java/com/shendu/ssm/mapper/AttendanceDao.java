@@ -9,5 +9,4 @@ import java.util.List;
 @Repository
 public interface AttendanceDao {
     int insertInfoBatch(List<Attendance> attendanceList);
-    List<Attendance> listAttendance();
 }
