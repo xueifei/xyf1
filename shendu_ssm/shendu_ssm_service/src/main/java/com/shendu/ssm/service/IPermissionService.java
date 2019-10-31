@@ -15,8 +15,6 @@ public interface IPermissionService {
 
 	List<Permission> getPermissionList();
 
-	List<Permission> listPermission(int page,int size );
-
 	void addPermission(Permission permission);
 
 	Permission getPermissionByID(long id);

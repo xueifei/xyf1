@@ -144,7 +144,7 @@
 								</thead>
 								<tbody>
 
-									<c:forEach items="${rs.list}" var="r">
+									<c:forEach items="${rs}" var="r">
 										<tr>
 											<td><input name="ids" type="checkbox"></td>
 											<td>${r.id }</td>
@@ -185,8 +185,7 @@
 					<div class="box-footer">
 						<div class="pull-left">
 							<div class="form-group form-inline">
-								总共${rs.pages}页，共${rs.total} 条数据。 每页
-								<select class="form-control" id="changePageSize" onchange="changePageSize()">
+								总共2 页，共14 条数据。 每页 <select class="form-control">
 									<option>1</option>
 									<option>2</option>
 									<option>3</option>
@@ -198,13 +197,15 @@
 
 						<div class="box-tools pull-right">
 							<ul class="pagination">
-								<li><a href="${pageContext.request.contextPath}/admin/listRole?page=1&size=${rs.pageSize}" aria-label="Previous">首页</a></li>
-								<li><a href="${pageContext.request.contextPath}/admin/listRole?page=${rs.pageNum-1}">上一页</a></li>
-								<c:forEach begin="1" end="${rs.pages}" var="pageNum">
-									<li><a href="${pageContext.request.contextPath}/admin/listRole?page=${pageNum}&size=${rs.pageSize}">${pageNum}</a></li>
-								</c:forEach>
-								<li><a href="${pageContext.request.contextPath}/admin/listRole?page=${rs.pageNum+1}&size=${rs.pageSize}">下一页</a></li>
-								<li><a href="${pageContext.request.contextPath}/admin/listRole?page=${rs.pages}&size=${rs.pageSize}" aria-label="Next">尾页</a></li>
+								<li><a href="#" aria-label="Previous">首页</a></li>
+								<li><a href="#">上一页</a></li>
+								<li><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#">下一页</a></li>
+								<li><a href="#" aria-label="Next">尾页</a></li>
 							</ul>
 						</div>
 
@@ -281,14 +282,6 @@
 	<script src="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.min.js"></script>
 	<script src="${pageContext.request.contextPath}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
 		<script>
-			function changePageSize() {
-				//获取下拉框的值
-				var size = $("#changePageSize").val();
-
-				//向服务器发送请求，改变没页显示条数
-				location.href = "${pageContext.request.contextPath}/admin/listRole?page=1&size="
-						+ size;
-			}
 			$(document).ready(function() {
 				// 选择框
 				$(".select2").select2();

@@ -5,7 +5,7 @@
 
 <mapper namespace="com.shendu.ssm.mapper.IRolePermissionDao">
     <select id="selectListRolePermissionByRID" resultType="RolePermission">
-        select * from role_permission WHERE rid = #{rid};
+        select * from role_permission WHERE rid = #{rid}
     </select>
 
     <delete id="deleteByPrimaryKey">

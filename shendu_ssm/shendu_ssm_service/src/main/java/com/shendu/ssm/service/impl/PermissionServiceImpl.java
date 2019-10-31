@@ -1,6 +1,5 @@
 package com.shendu.ssm.service.impl;
 
-import com.github.pagehelper.PageHelper;
 import com.shendu.ssm.domain.Permission;
 import com.shendu.ssm.domain.Role;
 import com.shendu.ssm.domain.RolePermission;
@@ -59,13 +58,6 @@ public class PermissionServiceImpl implements IPermissionService {
 
 	@Override
 	public List<Permission> getPermissionList() {
-		return permissionDao.selectPermissionList();
-	}
-
-	@Override
-	public List<Permission> listPermission(int page, int size) {
-		//参数pageNum 是页码值   参数pageSize 代表是每页显示条数
-		PageHelper.startPage(page, size);
 		return permissionDao.selectPermissionList();
 	}
 

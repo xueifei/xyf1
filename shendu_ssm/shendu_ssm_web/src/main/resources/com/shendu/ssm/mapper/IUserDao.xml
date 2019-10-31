@@ -13,7 +13,7 @@
     </select>
 
     <select id="selectUserList" resultType="User">
-        select * from USER
+        select * from USER order by id desc
     </select>
 
     <insert id="insertUser">

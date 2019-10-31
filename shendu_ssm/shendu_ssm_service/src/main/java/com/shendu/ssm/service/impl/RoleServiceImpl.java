@@ -1,6 +1,5 @@
 package com.shendu.ssm.service.impl;
 
-import com.github.pagehelper.PageHelper;
 import com.shendu.ssm.domain.Role;
 import com.shendu.ssm.domain.User;
 import com.shendu.ssm.domain.UserRole;
@@ -70,9 +69,7 @@ public class RoleServiceImpl implements IRoleService {
 	}
 
 	@Override
-	public List<Role> listRole(int page, int size) {
-		//参数pageNum 是页码值   参数pageSize 代表是每页显示条数
-		PageHelper.startPage(page, size);
+	public List<Role> listRole() {
 		return roleDao.selectRoleList();
 	}
 

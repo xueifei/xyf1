@@ -5,15 +5,11 @@
 
 <mapper namespace="com.shendu.ssm.mapper.IPermissionDao">
     <select id="selectByPrimaryKey" resultType="Permission">
-        select * from permission WHERE id = #{id};
+        select * from permission WHERE id = #{id}
     </select>
     
     <select id="selectPermissionList" resultType="Permission">
-        select * from permission ORDER BY id asc
-    </select>
-
-    <select id="PermissionList" resultType="Permission">
-        select * from permission
+        select * from permission ORDER BY id DESC
     </select>
 
     <insert id="insertPermission">
