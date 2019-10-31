@@ -38,4 +38,10 @@ public class AttendanceController {
 
         return "upload";
     }
+    //
+    @RequestMapping(value="/findAll")
+    public String findAll() throws UnsupportedEncodingException {
+
+        return "attendance";
+    }
 }

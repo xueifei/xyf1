@@ -34,7 +34,7 @@ public class StudentDetailController {
 
     //批量修改学生班级
     @RequestMapping(value = "/updateStuClassBatch",method = {RequestMethod.POST})
-    public String updateStuClassBatch( @RequestParam("stuClass") String stuClass,@RequestParam("list") Integer[] ids ){
+    public String updateStuClassBatch(  String stuClass, Integer[] ids ){
         Integer[] ids1 = {1,2,3};
         boolean isTrue = studentDetailService.updateStuClassBatch(stuClass,ids1);
         ModelAndView modelAndView = new ModelAndView();
