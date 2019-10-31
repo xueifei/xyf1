@@ -1,11 +1,13 @@
 package com.shendu.ssm.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.shendu.ssm.domain.Permission;
 import com.shendu.ssm.service.IPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 import java.util.List;
@@ -21,8 +23,10 @@ public class PermissionController {
 	IPermissionService permissionService;
 
 	@RequestMapping("listPermission")
-	public String list(Model model) {
-		List<Permission> ps = permissionService.getPermissionList();
+	public String list(Model model, @RequestParam(name = "page", required = true, defaultValue = "1") int page, @RequestParam(name = "size", required = true, defaultValue = "4") int size) {
+		List<Permission> ps1 = permissionService.listPermission(page,size);
+		//PageInfo就是一个分页Bean
+		PageInfo ps=new PageInfo(ps1);
 		model.addAttribute("ps", ps);
 		return "listPermission";
 	}

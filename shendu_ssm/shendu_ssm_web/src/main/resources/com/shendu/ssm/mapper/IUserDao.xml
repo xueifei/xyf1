@@ -13,7 +13,7 @@
     </select>
 
     <select id="selectUserList" resultType="User">
-        select * from USER order by id desc
+        select * from USER
     </select>
 
     <insert id="insertUser">
@@ -25,7 +25,9 @@
     </delete>
     
     <update id="updateUser">
-        UPDATE user set name=#{name},password=#{password},salt=#{salt} WHERE id = #{id}
+        UPDATE user set name=#{name},
+        password=#{password}
+      WHERE id = #{id}
     </update>
 
 </mapper>

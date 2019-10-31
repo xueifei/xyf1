@@ -13,7 +13,9 @@ public interface IRoleService{
 
 	List<Role> listRoleByUser(User user);
 
-	List<Role> listRole();
+	List<Role> listRole(int page,int size );
+
+	List<Role> selectlistRole();
 
 	void addRole(Role role);
 

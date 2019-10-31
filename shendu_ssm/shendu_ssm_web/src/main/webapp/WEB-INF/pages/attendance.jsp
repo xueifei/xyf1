@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -81,7 +79,7 @@
 			<!-- 内容头部 -->
 			<section class="content-header">
 			<h1>
-				考勤信息 <small></small>
+				角色管理 <small>全部角色</small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="${pageContext.request.contextPath}/index.jsp"><i
@@ -106,7 +104,7 @@
 							<div class="pull-left">
 								<div class="form-group form-inline">
 									<div class="btn-group">
-										<button type="button" class="btn btn-default" title="新建" onclick="location.href=''">
+										<button type="button" class="btn btn-default" title="新建" onclick="location.href='addRole1'">
 											<i class="fa fa-file-o"></i> 新建
 										</button>
 										
@@ -149,13 +147,13 @@
 											<td><input name="ids" type="checkbox"></td>
 											<td>${as.id }</td>
 											<td>${as.name }</td>
-											<td><fmt:formatDate value="${as.attendanceDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+											<td>${as.attendanceDate}</td>
 											<td>${as.statusStr}</td>
-											<td>${as.student.stuClass}</td>
-											<td><fmt:formatDate value="${as.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+											<td>${as.SId}</td>
+											<td>${as.createDate}</td>
 											<td class="text-center">
 												<a href="editRole?id=${r.id}" class="btn bg-olive btn-xs">编辑</a>
-												<a href="deleteRole?id=${r.id}" class="btn bg-olive btn-xs">删除</a>
+												<a href="deleteRole?id=${r.id}" class="btn bg-olive btn-xs">删除角色</a>
 											</td>
 										</tr>
 									</c:forEach>
@@ -211,9 +209,7 @@
 					<!-- /.box-footer-->
 
 				</div>
-					<shiro:authenticated>
-						<h2 style="color: #9f191f">${result}</h2>
-					</shiro:authenticated>
+
 				</section>
 				<!-- 正文区域 /-->
 

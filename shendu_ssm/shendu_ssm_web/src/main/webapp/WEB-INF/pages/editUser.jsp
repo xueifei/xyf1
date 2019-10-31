@@ -109,7 +109,7 @@
 						<div class="col-md-2 title">密码</div>
 						<div class="col-md-4 data">
 							<input type="password" class="form-control" name="password"
-								placeholder="密码" value="" placeholder="留空就表示不修改密码">
+								placeholder="密码" value="${user.password}" placeholder="留空就表示不修改密码">
 						</div>
 						<%--<div class="col-md-2 title">邮箱</div>
 						<div class="col-md-4 data">

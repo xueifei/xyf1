@@ -25,7 +25,7 @@
             <tr>
                 <td>${p.id}</td>
                 <td>${p.name}</td>
-                <td>${p.desc_}</td>
+                <td>${p.desc}</td>
                 <td>${p.url}</td>
                 <td><a href="editPermission?id=${p.id}">编辑</a></td>
                 <td><a href="deletePermission?id=${p.id}">删除</a></td>
@@ -36,7 +36,7 @@
     <div>
         <form action="addPermission" method="post">
             权限名称: <input type="text" name="name"> <br>
-            权限描述: <input type="text" name="desc_"> <br>
+            权限描述: <input type="text" name="desc"> <br>
             权限对应的url: <input type="text" name="url"> <br><br>
             <input type="submit" value="增加">
         </form>

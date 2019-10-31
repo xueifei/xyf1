@@ -9,8 +9,9 @@
     </select>
 
     <select id="selectRoleList" resultType="Role">
-        select * FROM role ORDER BY id desc
+        select * FROM role
     </select>
+
 
     <insert id="insertRole">
         INSERT into role(name,desc_) VALUES (#{name},#{desc})
