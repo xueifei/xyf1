@@ -3,6 +3,7 @@ package com.shendu.ssm.service;
 import com.shendu.ssm.domain.Attendance;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.ParseException;
 import java.util.List;
 
 public interface AttendanceService {
@@ -17,4 +18,6 @@ public interface AttendanceService {
 
     //根据list集合中的sId 获取班级信息
     List<Attendance> findStuClassByList(List<Attendance> attendances);
+
+    List<Attendance> findByCreateDate(int page, int size) throws ParseException;
 }

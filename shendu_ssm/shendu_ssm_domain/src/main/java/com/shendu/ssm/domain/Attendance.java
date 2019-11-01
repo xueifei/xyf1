@@ -12,10 +12,10 @@ public class Attendance {
 
     private Long id;
     private String name;
-    private Date attendanceDate; //考勤时间
+    private Date attendanceDate; //打卡时间
     private Integer status; //考勤状态 0 正常 1 迟到 2 旷课
     private String statusStr;
-    private Date createDate;
+    private Date createDate;//规定时间
     private Integer sId;//学生编号，唯一标识，对应学生详情表id
     private StudentDetail student;
     public String getStatusStr() {

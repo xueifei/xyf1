@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Properties;
 import java.util.Set;
 
-import cn.deepcoding.service.impl.ProxyTeacherWatchServiceImpl;
+
 
 public class MessageXsendUtils {
 	public static String your_appid;
@@ -21,7 +21,7 @@ public class MessageXsendUtils {
 	static {
 
 		try {
-			InputStream in = WeixinUtil.class.getClassLoader().getResourceAsStream("const.properties");
+			InputStream in = MessageXsendUtils.class.getClassLoader().getResourceAsStream("const.properties");
 			Properties prop = new Properties();
 			prop.load(in);
 			your_appid = (String) prop.get("messiage_appid");
