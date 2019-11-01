@@ -74,7 +74,7 @@
 							class="fa fa-circle-o"></i>学生详细信息
 					</a></li>
 					<li id="system-setting"><a
-							href="${pageContext.request.contextPath}/student/findAll"> <i
+							href="${pageContext.request.contextPath}/note/findAll"> <i
 							class="fa fa-circle-o"></i>短信记录
 					</a></li>
 					<li id="system-setting">

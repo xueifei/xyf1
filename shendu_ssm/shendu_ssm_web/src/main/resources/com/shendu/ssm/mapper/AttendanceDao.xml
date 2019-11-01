@@ -76,4 +76,31 @@
             ( #{item.name,jdbcType=VARCHAR}, #{item.attendanceDate,jdbcType=TIMESTAMP},#{item.status,jdbcType=INTEGER},#{item.createDate,jdbcType=TIMESTAMP},#{item.sId,jdbcType=INTEGER})
         </foreach>
     </insert>
+    <update id="updateAttendance">
+        update attendance set name = #{name}, status = #{status} where id = {id}
+    </update>
+
+    <delete id="deleteAttendance">
+        delete from attendance where id = #{id}
+    </delete>
+    <select id="findList" resultType="com.shendu.ssm.domain.Attendance">
+        select * from attendance where id = #{id}
+    </select>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
