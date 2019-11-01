@@ -200,7 +200,7 @@
 						<div class="box-tools pull-right">
 							<ul class="pagination">
 								<li><a href="${pageContext.request.contextPath}/admin/listRole?page=1&size=${rs.pageSize}" aria-label="Previous">首页</a></li>
-								<li><a href="${pageContext.request.contextPath}/admin/listRole?page=${rs.pageNum-1}">上一页</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/listRole?page=${rs.pageNum-1}&size=${rs.pageSize}">上一页</a></li>
 								<c:forEach begin="1" end="${rs.pages}" var="pageNum">
 									<li><a href="${pageContext.request.contextPath}/admin/listRole?page=${pageNum}&size=${rs.pageSize}">${pageNum}</a></li>
 								</c:forEach>

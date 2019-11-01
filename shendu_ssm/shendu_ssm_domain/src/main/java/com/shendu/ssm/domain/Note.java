@@ -12,6 +12,7 @@ public class Note {
     private Integer status;
     private String staterStr;
     private Integer templateid;
+    private TemplateNote templateNote;
 
     public String getStaterStr() {
         if (status !=null){
