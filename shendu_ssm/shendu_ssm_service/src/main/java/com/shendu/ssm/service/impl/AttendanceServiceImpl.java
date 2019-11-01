@@ -1,11 +1,13 @@
 package com.shendu.ssm.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.shendu.ssm.domain.Attendance;
 
 import com.shendu.ssm.domain.StudentDetail;
 import com.shendu.ssm.mapper.AttendanceDao;
 import com.shendu.ssm.mapper.StudentDetailDao;
 import com.shendu.ssm.service.AttendanceService;
+import com.shendu.ssm.utils.DateUtils;
 import com.shendu.ssm.utils.ReadExcel;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -61,6 +65,19 @@ public class AttendanceServiceImpl implements AttendanceService {
             list.add(attendance1);
         }
         return list;
+    }
+
+    @Override
+    public List<Attendance> findByCreateDate(int page, int size) throws ParseException {
+
+        String date2String = DateUtils.date2String(new Date(), "yyyy-MM-dd HH:dd");
+        String str = " 00:00";
+        String  dateStr = date2String.concat(str);
+        Date date = DateUtils.string2Date(dateStr, "yyyy-MM-dd HH:mm");
+        PageHelper.startPage(page,size);
+        List<Attendance> attendanceList = attendanceDao.findByCreateDate(date);
+        List<Attendance> stuClassByList = findStuClassByList(attendanceList);
+        return stuClassByList;
     }
 
 } 

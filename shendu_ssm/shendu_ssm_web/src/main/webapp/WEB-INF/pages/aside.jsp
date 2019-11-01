@@ -66,7 +66,7 @@
 				<ul class="treeview-menu">
 
 					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/attendance/findAll">
+						href="${pageContext.request.contextPath}/attendance/findByCreateDate?page=1&size=5">
 							<i class="fa fa-circle-o"></i> 考勤信息
 					</a></li>
 					<li id="system-setting"><a

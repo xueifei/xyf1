@@ -1,5 +1,6 @@
 package com.shendu.ssm.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.shendu.ssm.domain.Attendance;
 import com.shendu.ssm.service.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
 import java.util.List;
 
 @Controller
@@ -42,8 +44,20 @@ public class AttendanceController {
     }
     //
     @RequestMapping(value="/findAll")
-    public String findAll() throws UnsupportedEncodingException {
+    public String findAll()  {
 
         return "attendance";
+    }
+
+    @RequestMapping(value="/findByCreateDate")
+    public ModelAndView findByCreateDate(int page,int size) throws ParseException {
+
+
+        List<Attendance> attendances = attendanceService.findByCreateDate(page , size);
+        PageInfo pageInfo = new PageInfo(attendances);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("attendanceList",pageInfo);
+        modelAndView.setViewName("attendance");
+        return modelAndView;
     }
 }
