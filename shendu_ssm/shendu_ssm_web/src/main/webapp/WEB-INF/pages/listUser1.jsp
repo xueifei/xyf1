@@ -85,7 +85,7 @@
 				<li><a href="${pageContext.request.contextPath}/index.jsp"><i
 						class="fa fa-dashboard"></i> 首页</a></li>
 				<li><a
-					href="${pageContext.request.contextPath}/admin/listUser">用户管理</a></li>
+					href="${pageContext.request.contextPath}/admin/listUser1">用户管理</a></li>
 
 				<li class="active">全部用户</li>
 			</ol>
@@ -108,7 +108,7 @@
 							<div class="pull-left">
 								<div class="form-group form-inline">
 									<div class="btn-group">
-										<button type="button" class="btn btn-default" title="新建" onclick="location.href='addUser1'">
+										<button type="button" class="btn btn-default" title="新建" onclick="location.href='addUser.jsp'">
 											<i class="fa fa-file-o"></i> 新建
 										</button>
 										
@@ -145,21 +145,17 @@
 								</thead>
 								<tbody>
 
-									<c:forEach items="${listUser.list}" var="u">
+									<c:forEach items="${listUser}" var="user">
 										<tr>
 											<td><input name="ids" type="checkbox"></td>
-											<td>${u.id }</td>
-											<td>${u.name }</td>
-											<td>${u.password }</td>
-											<td>${u.salt }</td>
-											<td>
-												<c:forEach items="${user_roles[u]}" var="r">
-													${r.name} <br>
-												</c:forEach>
-											</td>
+											<td>${user.id }</td>
+											<td>${user.name }</td>
+											<td>${user.email }</td>
+											<td>${user.phoneNum }</td>
+											<td>${user.statusStr }</td>											
 											<td class="text-center">
-												<a href="editUser?id=${u.id}" class="btn bg-olive btn-xs">编辑</a>
-												<a href="deleteUser?id=${u.id}" class="btn bg-olive btn-xs">删除</a>
+												<a href="${pageContext.request.contextPath}/user/findById.do?id=${user.id}" class="btn bg-olive btn-xs">详情</a>
+												<a href="${pageContext.request.contextPath}/user/findUserByIdAndAllRole.do?id=${user.id}" class="btn bg-olive btn-xs">添加角色</a>
 											</td>
 										</tr>
 									</c:forEach>
@@ -187,27 +183,27 @@
 					<div class="box-footer">
 						<div class="pull-left">
 							<div class="form-group form-inline">
-								总共${listUser.pages}页，共${listUser.total} 条数据。 每页
-								<select class="form-control" name="size" id="changePageSize" onchange="changePageSize()">
-									<option>${listUser.size}</option>
-									<option >1</option>
-									<option >2</option>
-									<option >3</option>
-									<option >4</option>
-									<option >5</option>
+								总共2 页，共14 条数据。 每页 <select class="form-control">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
 								</select> 条
 							</div>
 						</div>
 
 						<div class="box-tools pull-right">
 							<ul class="pagination">
-								<li><a href="${pageContext.request.contextPath}/admin/listUser?page=1&size=${listUser.pageSize}" aria-label="Previous">首页</a></li>
-								<li><a href="${pageContext.request.contextPath}/admin/listUser?page=${listUser.pageNum-1}&size=${listUser.pageSize}">上一页</a></li>
-								<c:forEach begin="1" end="${listUser.pages}" var="pageNum">
-								<li><a href="${pageContext.request.contextPath}/admin/listUser?page=${pageNum}&size=${listUser.pageSize}">${pageNum}</a></li>
-								</c:forEach>
-								<li><a href="${pageContext.request.contextPath}/admin/listUser?page=${listUser.pageNum+1}&size=${listUser.pageSize}">下一页</a></li>
-								<li><a href="${pageContext.request.contextPath}/admin/listUser?page=${listUser.pages}&size=${listUser.pageSize}" aria-label="Next">尾页</a></li>
+								<li><a href="#" aria-label="Previous">首页</a></li>
+								<li><a href="#">上一页</a></li>
+								<li><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#">下一页</a></li>
+								<li><a href="#" aria-label="Next">尾页</a></li>
 							</ul>
 						</div>
 
@@ -226,72 +222,64 @@
 			<!-- 底部导航 -->
 			<footer class="main-footer">
 			<div class="pull-right hidden-xs">
-				<b>Version</b> 1.0.0
+				<b>Version</b> 1.0.8
 			</div>
-			<strong>Copyright &copy; 2019-2020 <a
+			<strong>Copyright &copy; 2014-2017 <a
 				href="http://www.itcast.cn">研究院研发部</a>.
 			</strong> All rights reserved. </footer>
 			<!-- 底部导航 /-->
 
 		</div>
 
-		<script src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/jQueryUI/jquery-ui.min.js"></script>
+		<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<script src="../../plugins/jQueryUI/jquery-ui.min.js"></script>
 		<script>
 			$.widget.bridge('uibutton', $.ui.button);
 		</script>
-		<script src="${pageContext.request.contextPath}/plugins/bootstrap/js/bootstrap.min.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/raphael/raphael-min.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/morris/morris.min.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/sparkline/jquery.sparkline.min.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/knob/jquery.knob.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/daterangepicker/moment.min.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/daterangepicker/daterangepicker.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/daterangepicker/daterangepicker.zh-CN.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/datepicker/bootstrap-datepicker.js"></script>
+		<script src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="../../plugins/raphael/raphael-min.js"></script>
+		<script src="../../plugins/morris/morris.min.js"></script>
+		<script src="../../plugins/sparkline/jquery.sparkline.min.js"></script>
+		<script src="../../plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+		<script src="../../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+		<script src="../../plugins/knob/jquery.knob.js"></script>
+		<script src="../../plugins/daterangepicker/moment.min.js"></script>
+		<script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+		<script src="../../plugins/daterangepicker/daterangepicker.zh-CN.js"></script>
+		<script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
 		<script
-			src="${pageContext.request.contextPath}/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+			src="../../plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
 		<script
-			src="${pageContext.request.contextPath}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/fastclick/fastclick.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/iCheck/icheck.min.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/adminLTE/js/app.min.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/treeTable/jquery.treetable.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/select2/select2.full.min.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+			src="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+		<script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+		<script src="../../plugins/fastclick/fastclick.js"></script>
+		<script src="../../plugins/iCheck/icheck.min.js"></script>
+		<script src="../../plugins/adminLTE/js/app.min.js"></script>
+		<script src="../../plugins/treeTable/jquery.treetable.js"></script>
+		<script src="../../plugins/select2/select2.full.min.js"></script>
+		<script src="../../plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
 		<script
-			src="${pageContext.request.contextPath}/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.zh-CN.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/bootstrap-markdown/js/bootstrap-markdown.js"></script>
+			src="../../plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.zh-CN.js"></script>
+		<script src="../../plugins/bootstrap-markdown/js/bootstrap-markdown.js"></script>
 		<script
-			src="${pageContext.request.contextPath}/plugins/bootstrap-markdown/locale/bootstrap-markdown.zh.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/bootstrap-markdown/js/markdown.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/bootstrap-markdown/js/to-markdown.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/ckeditor/ckeditor.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/input-mask/jquery.inputmask.js"></script>
+			src="../../plugins/bootstrap-markdown/locale/bootstrap-markdown.zh.js"></script>
+		<script src="../../plugins/bootstrap-markdown/js/markdown.js"></script>
+		<script src="../../plugins/bootstrap-markdown/js/to-markdown.js"></script>
+		<script src="../../plugins/ckeditor/ckeditor.js"></script>
+		<script src="../../plugins/input-mask/jquery.inputmask.js"></script>
 		<script
-			src="${pageContext.request.contextPath}/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/input-mask/jquery.inputmask.extensions.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/datatables/jquery.dataTables.min.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/datatables/dataTables.bootstrap.min.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/chartjs/Chart.min.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/flot/jquery.flot.min.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/flot/jquery.flot.resize.min.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/flot/jquery.flot.pie.min.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/flot/jquery.flot.categories.min.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.min.js"></script>
-		<script src="${pageContext.request.contextPath}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
+			src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+		<script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
+		<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+		<script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
+		<script src="../../plugins/chartjs/Chart.min.js"></script>
+		<script src="../../plugins/flot/jquery.flot.min.js"></script>
+		<script src="../../plugins/flot/jquery.flot.resize.min.js"></script>
+		<script src="../../plugins/flot/jquery.flot.pie.min.js"></script>
+		<script src="../../plugins/flot/jquery.flot.categories.min.js"></script>
+		<script src="../../plugins/ionslider/ion.rangeSlider.min.js"></script>
+		<script src="../../plugins/bootstrap-slider/bootstrap-slider.js"></script>
 		<script>
-			function changePageSize() {
-				//获取下拉框的值
-				var pageSize = $("#changePageSize").val();
-
-				//向服务器发送请求，改变没页显示条数
-				location.href = "${pageContext.request.contextPath}/admin/listUser?page=1&size="
-						+ pageSize;
-			}
 			$(document).ready(function() {
 				// 选择框
 				$(".select2").select2();
