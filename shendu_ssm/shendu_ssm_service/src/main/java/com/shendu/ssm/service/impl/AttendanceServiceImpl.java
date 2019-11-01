@@ -73,13 +73,11 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
-    public List<Attendance> findByCreateDate(int page, int size)  {
+    public List<Attendance> findByCreateDate(int page, int size) throws ParseException {
 
 
         PageHelper.startPage(page,size);
-        List<Attendance> attendanceList = attendanceDao.findByCreateDate(findDate());
-        List<Attendance> stuClassByList = findStuClassByList(attendanceList);
-        return stuClassByList;
+        return attendanceDao.findByCreateDate(findDate());
     }
 
     @Override
@@ -169,4 +167,4 @@ public class AttendanceServiceImpl implements AttendanceService {
         }
         return date;
     }
-} 
+}

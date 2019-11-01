@@ -151,7 +151,7 @@
 											<td>${as.name }</td>
 											<td><fmt:formatDate value="${as.attendanceDate}" pattern="yyyy-MM-dd HH:mm"/></td>
 											<td>${as.statusStr}</td>
-											<td>${as.student.stuClass}</td>
+											<td>${as.stuClass}</td>
 											<td><fmt:formatDate value="${as.createDate}" pattern="yyyy-MM-dd HH:mm"/></td>
 											<td class="text-center">
 												<a href="${pageContext.request.contextPath}/student/editStu?id=${as.id}" class="btn bg-olive btn-xs">编辑</a>
@@ -285,14 +285,14 @@
 	<script src="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.min.js"></script>
 	<script src="${pageContext.request.contextPath}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
 		<script>
-			function changePageSize() {
-				//获取下拉框的值
-				var size = $("#changePageSize").val();
+		function changePageSize() {
+			//获取下拉框的值
+			var pageSize = $("#changePageSize").val();
 
-				//向服务器发送请求，改变没页显示条数
-				location.href = "${pageContext.request.contextPath}/attendance/findByCreateDate?page=1&size="
-						+ size;
-			}
+			//向服务器发送请求，改变没页显示条数
+			location.href = "${pageContext.request.contextPath}/attendance/findByCreateDate?page=1&size="
+					+ pageSize;
+		}
 			$(document).ready(function() {
 				// 选择框
 				$(".select2").select2();

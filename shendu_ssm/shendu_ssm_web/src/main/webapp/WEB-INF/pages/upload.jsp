@@ -275,7 +275,7 @@
 													$(this).data("clicks",
 															!clicks);
 												});
-							});
+							})
 		</script>
 </body>
 

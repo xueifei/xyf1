@@ -77,8 +77,8 @@
         </foreach>
     </insert>
     <select id="findByCreateDate"  parameterType="java.util.Date" resultType="com.shendu.ssm.domain.Attendance">
-        select id, name , attendance_time attendanceDate, stater status,time createDate,s_id sId
-        from attendance
-        where time>#{date,jdbcType=DATE}
+       select a.id, a.name , a.attendance_time attendanceDate, a.stater status,a.time createDate,a.s_id sId,s.stu_class stuClass
+        from attendance a,student_detail s
+        where time>#{date,jdbcType=DATE} AND s.id=a.s_id
     </select>
 </mapper>

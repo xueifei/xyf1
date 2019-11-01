@@ -85,7 +85,7 @@
 				<li><a href="${pageContext.request.contextPath}/index.jsp"><i
 						class="fa fa-dashboard"></i> 首页</a></li>
 				<li><a
-					href="${pageContext.request.contextPath}/admin/listNote">信息记录管理</a></li>
+					href="${pageContext.request.contextPath}/note/listNote">信息记录管理</a></li>
 
 				<li class="active">全部信息</li>
 			</ol>
@@ -141,7 +141,7 @@
 								</thead>
 								<tbody>
 
-									<c:forEach items="${rs.list}" var="r">
+									<c:forEach items="${rs.list}" var="r" varStatus="vs">
 										<tr>
 											<td><input name="ids" type="checkbox"></td>
 											<td>${r.id}</td>
@@ -150,7 +150,7 @@
 											<td>${r.staterStr}</td>
                                             <td>${r.templateId}</td>
 											<td class="text-center">
-												<a href="deleteRole?id=${r.id}" class="btn bg-olive btn-xs">删除角色</a>
+												<a href="deleteNote?id=${r.id}" class="btn bg-olive btn-xs">删除信息</a>
 											</td>
 										</tr>
 									</c:forEach>
@@ -173,7 +173,9 @@
 
 					</div>
 					<!-- /.box-body -->
-
+                    <shiro:authenticated>
+                        <h2>${mess}</h2>
+                    </shiro:authenticated>
 					<!-- .box-footer-->
 					<div class="box-footer">
 						<div class="pull-left">
@@ -192,13 +194,13 @@
 
 						<div class="box-tools pull-right">
 							<ul class="pagination">
-								<li><a href="${pageContext.request.contextPath}/admin/listRole?page=1&size=${rs.pageSize}" aria-label="Previous">首页</a></li>
-								<li><a href="${pageContext.request.contextPath}/admin/listRole?page=${rs.pageNum-1}">上一页</a></li>
+								<li><a href="${pageContext.request.contextPath}/note/findAll?page=1&size=${rs.pageSize}" aria-label="Previous">首页</a></li>
+								<li><a href="${pageContext.request.contextPath}/note/findAll?page=${rs.pageNum-1}&size=${rs.pageSize}">上一页</a></li>
 								<c:forEach begin="1" end="${rs.pages}" var="pageNum">
-									<li><a href="${pageContext.request.contextPath}/admin/listRole?page=${pageNum}&size=${rs.pageSize}">${pageNum}</a></li>
+									<li><a href="${pageContext.request.contextPath}/note/findAll?page=${pageNum}&size=${rs.pageSize}">${pageNum}</a></li>
 								</c:forEach>
-								<li><a href="${pageContext.request.contextPath}/admin/listRole?page=${rs.pageNum+1}&size=${rs.pageSize}">下一页</a></li>
-								<li><a href="${pageContext.request.contextPath}/admin/listRole?page=${rs.pages}&size=${rs.pageSize}" aria-label="Next">尾页</a></li>
+								<li><a href="${pageContext.request.contextPath}/note/findAll?page=${rs.pageNum+1}&size=${rs.pageSize}">下一页</a></li>
+								<li><a href="${pageContext.request.contextPath}/note/findAll?page=${rs.pages}&size=${rs.pageSize}" aria-label="Next">尾页</a></li>
 							</ul>
 						</div>
 
@@ -275,14 +277,14 @@
 	<script src="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.min.js"></script>
 	<script src="${pageContext.request.contextPath}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
 		<script>
-			<%--function changePageSize() {--%>
-				<%--//获取下拉框的值--%>
-				<%--var size = $("#changePageSize").val();--%>
+			function changePageSize() {
+				//获取下拉框的值
+				var size = $("#changePageSize").val();
 
-				<%--//向服务器发送请求，改变没页显示条数--%>
-				<%--location.href = "${pageContext.request.contextPath}/admin/listRole?page=1&size="--%>
-						<%--+ size;--%>
-			<%--}--%>
+				//向服务器发送请求，改变没页显示条数
+				location.href = "${pageContext.request.contextPath}/note/findAll?page=1&size="
+						+ size;
+			}
 			$(document).ready(function() {
 				// 选择框
 				$(".select2").select2();
