@@ -63,21 +63,23 @@ public class AttendanceServiceImpl implements AttendanceService {
             BeanUtils.copyProperties(attendance,attendance1);
             attendance1.setStudent(byId);
             list.add(attendance1);
+
         }
+
         return list;
     }
 
     @Override
     public List<Attendance> findByCreateDate(int page, int size) throws ParseException {
 
-        String date2String = DateUtils.date2String(new Date(), "yyyy-MM-dd HH:dd");
+        String date2String = DateUtils.date2String(new Date(), "yyyy-MM-dd HH:mm");
         String str = " 00:00";
         String  dateStr = date2String.concat(str);
         Date date = DateUtils.string2Date(dateStr, "yyyy-MM-dd HH:mm");
         PageHelper.startPage(page,size);
-        List<Attendance> attendanceList = attendanceDao.findByCreateDate(date);
-        List<Attendance> stuClassByList = findStuClassByList(attendanceList);
-        return stuClassByList;
+//        List<Attendance> attendanceList = attendanceDao.findByCreateDate(date);
+//        List<Attendance> stuClassByList = findStuClassByList(attendanceList);
+        return attendanceDao.findByCreateDate(date);
     }
 
 } 
