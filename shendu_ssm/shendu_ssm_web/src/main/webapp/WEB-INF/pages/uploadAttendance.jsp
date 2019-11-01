@@ -106,8 +106,8 @@
 							<div class="box-tools pull-right">
 								<div class="has-feedback">
 									<input type="text" class="form-control input-sm"
-										placeholder="搜索"> <span
-										class="glyphicon glyphicon-search form-control-feedback"></span>
+										placeholder="搜索">
+									<span class="glyphicon glyphicon-search form-control-feedback"></span>
 								</div>
 							</div>
 							<!--工具栏/-->
@@ -130,7 +130,7 @@
 								</thead>
 								<tbody>
 
-									<c:forEach items="${attendanceList}" var="as">
+									<c:forEach items="${attendanceList.list}" var="as" >
 										<tr>
 											<td><input name="ids" type="checkbox"></td>
 											<td>${as.name }</td>
@@ -138,10 +138,7 @@
 											<td>${as.statusStr}</td>
 											<td>${as.student.stuClass}</td>
 											<td><fmt:formatDate value="${as.createDate}" pattern="yyyy-MM-dd HH:mm"/></td>
-											<td class="text-center">
-												<a href="#" class="btn bg-olive btn-xs">编辑</a>
-												<a href="#" class="btn bg-olive btn-xs">删除</a>
-											</td>
+
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -164,35 +161,6 @@
 					</div>
 					<!-- /.box-body -->
 
-					<!-- .box-footer-->
-					<div class="box-footer">
-						<div class="pull-left">
-							<div class="form-group form-inline">
-								总共2 页，共14 条数据。 每页 <select class="form-control">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
-								</select> 条
-							</div>
-						</div>
-
-						<div class="box-tools pull-right">
-							<ul class="pagination">
-								<li><a href="#" aria-label="Previous">首页</a></li>
-								<li><a href="#">上一页</a></li>
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">下一页</a></li>
-								<li><a href="#" aria-label="Next">尾页</a></li>
-							</ul>
-						</div>
-
-					</div>
 					<!-- /.box-footer-->
 
 				</div>
@@ -265,6 +233,14 @@
 	<script src="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.min.js"></script>
 	<script src="${pageContext.request.contextPath}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
 		<script>
+			function changePageSize() {
+				//获取下拉框的值
+				var size = $("#changePageSize").val();
+
+				//向服务器发送请求，改变没页显示条数
+				location.href = "${pageContext.request.contextPath}/attendance/upload?page=1&size="
+						+ size;
+			}
 			$(document).ready(function() {
 				// 选择框
 				$(".select2").select2();

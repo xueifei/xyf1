@@ -146,10 +146,10 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${listStu.list}" var="s">
+									<c:forEach items="${listStu.list}" var="s" varStatus="vs">
 										<tr>
-											<td><input name="ids" type="checkbox" value="${s.id}"></td>
-											<td>${s.id }</td>
+											<td><input name="ids" type="checkbox" value="${s.id}" ></td>
+											<td>${s.id}</td>
 											<td>${s.name }</td>
 											<td>${s.address}</td>
 											<td>${s.stuClass}</td>

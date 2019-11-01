@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
@@ -25,11 +26,13 @@ public class AttendanceController {
 
 
     @RequestMapping(value="/upload",method = RequestMethod.POST)
-    public ModelAndView upload(@RequestParam(value="file",required = false) MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+    public ModelAndView upload(@RequestParam(value="file",required = false) MultipartFile file, HttpServletRequest request, HttpServletResponse response,@RequestParam(name = "page", required = true, defaultValue = "1") int page, @RequestParam(name = "size", required = true, defaultValue = "4") int size) throws UnsupportedEncodingException {
         ModelAndView modelAndView = new ModelAndView();
-        List<Attendance> attendances = attendanceService.readExcelFile(file);
-        int i = attendanceService.insertInfoBatch(attendances);
-        List<Attendance> attendances1 = attendanceService.findStuClassByList( attendances);
+        List<Attendance> ttendances = attendanceService.readExcelFile(file);
+        int i = attendanceService.insertInfoBatch(ttendances);
+        List<Attendance> attendances12 = attendanceService.findStuClassByList( ttendances);
+        //PageInfo就是一个分页Bean
+        PageInfo attendances1=new PageInfo(attendances12);
         modelAndView.addObject("attendanceList",attendances1);
         modelAndView.addObject("result",i>0?"上传成功":"上传失败");
         modelAndView.setViewName("uploadAttendance");
@@ -50,7 +53,8 @@ public class AttendanceController {
     }
 
     @RequestMapping(value="/findByCreateDate")
-    public ModelAndView findByCreateDate(int page,int size) throws ParseException {
+    public ModelAndView findByCreateDate(@RequestParam(name = "page", required = true, defaultValue = "1") int page, @RequestParam(name = "size",
+            required = true, defaultValue = "4") int size) throws ParseException {
 
 
         List<Attendance> attendances = attendanceService.findByCreateDate(page , size);

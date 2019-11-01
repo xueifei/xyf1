@@ -9,7 +9,7 @@ import java.util.Date;
 @ToString
 public class Attendance {
 
-
+    private String stuClass;
     private Long id;
     private String name;
     private Date attendanceDate; //打卡时间
@@ -18,6 +18,7 @@ public class Attendance {
     private Date createDate;//规定时间
     private Integer sId;//学生编号，唯一标识，对应学生详情表id
     private StudentDetail student;
+
     public String getStatusStr() {
         if (status !=null){
             if (status == 0){

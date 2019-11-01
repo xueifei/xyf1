@@ -144,7 +144,7 @@
 								</thead>
 								<tbody>
 
-									<c:forEach items="${ps.list}" var="p">
+									<c:forEach items="${ps.list}" var="p" varStatus="vs">
 										<tr>
 											<td><input name="ids" type="checkbox"></td>
 											<td>${p.id }</td>
