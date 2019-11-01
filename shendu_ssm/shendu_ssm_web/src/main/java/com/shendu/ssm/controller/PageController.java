@@ -22,23 +22,10 @@ public class PageController {
 		return "login";
 	}
 
-	@RequestMapping("deleteOrder")
-	public String deleteOrder() {
-		return "deleteOrder";
-	}
 
-	@RequestMapping("deleteProduct")
-	public String deleteProduct() {
-		return "deleteProduct";
-	}
-
-	@RequestMapping("listProduct")
-	public String listProduct() {
-		return "listProduct";
-	}
 
 	@RequestMapping("unauthorized")
 	public String noPerms() {
-		return "unauthorized";
+		return "403";
 	}
 }
