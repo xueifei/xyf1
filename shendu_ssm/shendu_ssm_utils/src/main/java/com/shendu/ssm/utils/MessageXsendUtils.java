@@ -1,6 +1,9 @@
 package com.shendu.ssm.utils;
 
 import java.io.*;
+import org.aspectj.weaver.ast.Var;
+
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -15,10 +18,10 @@ public class MessageXsendUtils {
     static {
 
         try {
-            InputStream in = MessageXsendUtils.class.getClassLoader().getResourceAsStream("const.properties");
+            InputStream in = MessageXsendUtils.class.getClassLoader().getResourceAsStream("com/shendu/ssm/utils/const.properties");
             Properties prop = new Properties();
             prop.load(in);
-            your_appid = (String) prop.get("messiage_appid");
+            your_appid = prop.getProperty("messiage_appid");
             your_appkey = (String) prop.get("messiage_appkey");
             project_id = (String) prop.get("messiage_project_id");
         } catch (IOException e) {
@@ -33,6 +36,7 @@ public class MessageXsendUtils {
         paramer.put("signature", appkey);//创建信息时的密码
         paramer.put("to", to);//收件人的手机号，现在短信仅支持一对一模式（该参数现在仅能提交一个联系人）
         paramer.put("project", project);//项目标记（ID）
+        if (vars !="" && vars != null)
         paramer.put("vars", vars);//使用文本变量动态控制短信中的文本
         return executePostByUsual(URL, paramer);
 
@@ -87,29 +91,28 @@ public class MessageXsendUtils {
     public static void main(String[] args) {
         // xsend demo
 
-
-         String response = MessageXsendUtils.xsend("your_appid", "your_appkey",
-          "telphone_number", "project_id", "var变量（jsonString）");
-
-        // "{\"code\":\"123456\",\"time\":\"10\"}");
-         System.out.println(response);
+//
+//         String response = MessageXsendDemo.xsend("your_appid", "your_appkey",
+//          "telphone_number", "project_id", "var变量（jsonString）");
+//
+//        // "{\"code\":\"123456\",\"time\":\"10\"}");
+//         System.out.println(response);
         // ProxyTeacherWatchServiceImpl impl = new
         // ProxyTeacherWatchServiceImpl();
         // Integer getrandom = impl.getrandom();
         // getmessige("15034358109", 888888);
         //getmessige("13303475875", 888888);
-//        getmessige("13718962979", 888888);
-
+       getmessige("13718962979", "111");
     }
 
-    public static void getmessige(String tel, Integer code) {
+    public static String  getmessige(String tel, String code) {
         // String response = MessageXsendDemo.xsend("29469",
         // "78452dce814b760875873e45ad07bb8c", tel, "`",
         // "{\"code\":\""+code+"\",\"time\":\"10\"}");
         String response = MessageXsendUtils.xsend(your_appid, your_appkey, tel, project_id,
-                "{\"code\":\"" + code + "\",\"time\":\"10\"}");
+                  code );
 
-        System.out.println(response);
+        return response;
 
     }
 }

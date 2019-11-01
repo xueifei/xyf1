@@ -11,4 +11,6 @@ public interface NoteService {
     boolean deleteNote(int id);
     List<Note> findAll(int page, int size);
     Note findList(int id);
+
+    int insertBatch(List<Note> notes);
 }

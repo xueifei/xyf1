@@ -140,7 +140,7 @@
 								</thead>
 								<tbody>
 
-									<c:forEach items="${attendanceList.list}" var="as" varStatus="vs">
+									<c:forEach items="${attendanceList.list}" var="as">
 										<tr>
 											<td><input name="ids" type="checkbox"></td>
 											<td>${as.id }</td>
@@ -174,7 +174,12 @@
 
 					</div>
 					<!-- /.box-body -->
-
+					<!-- 批量发短信 -->
+					<div class="btn-group" >
+						<button type="button" class="btn btn-default"  title="批量发送短信" onclick="location.href='${pageContext.request.contextPath}/attendance/messageSend'">
+							<i class="fa fa-file-o"></i> 一键批量发送短信
+						</button>
+					</div>
 					<!-- .box-footer-->
 					<div class="box-footer">
 						<div class="pull-left">

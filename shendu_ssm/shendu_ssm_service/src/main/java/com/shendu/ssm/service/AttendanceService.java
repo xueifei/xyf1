@@ -1,6 +1,7 @@
 package com.shendu.ssm.service;
 
 import com.shendu.ssm.domain.Attendance;
+import com.shendu.ssm.domain.Note;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.ParseException;
@@ -26,4 +27,8 @@ public interface AttendanceService {
     Attendance findById(Integer id);
 
     boolean deleteAtt(Integer id);
+
+    List<Attendance> findByCreateDate();
+
+    List<Note> MessageSend(List<Attendance> byCreateDate);
 }

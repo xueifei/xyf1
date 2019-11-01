@@ -1,14 +1,20 @@
 package com.shendu.ssm.service.impl;
 
+import com.alibaba.druid.support.json.JSONUtils;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.shendu.ssm.domain.Attendance;
 
+import com.shendu.ssm.domain.Note;
 import com.shendu.ssm.domain.StudentDetail;
 import com.shendu.ssm.mapper.AttendanceDao;
 import com.shendu.ssm.mapper.StudentDetailDao;
 import com.shendu.ssm.service.AttendanceService;
 import com.shendu.ssm.utils.DateUtils;
+import com.shendu.ssm.utils.MessageXsendUtils;
 import com.shendu.ssm.utils.ReadExcel;
+import jdk.nashorn.internal.runtime.JSONFunctions;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 @Transactional
@@ -63,23 +68,104 @@ public class AttendanceServiceImpl implements AttendanceService {
             BeanUtils.copyProperties(attendance,attendance1);
             attendance1.setStudent(byId);
             list.add(attendance1);
-
         }
-
         return list;
     }
 
     @Override
     public List<Attendance> findByCreateDate(int page, int size) throws ParseException {
 
+
+        PageHelper.startPage(page,size);
+        return attendanceDao.findByCreateDate(findDate());
+    }
+
+    @Override
+    public List<Attendance> findByCreateDate() {
+        List<Attendance> byCreateDate = attendanceDao.findByCreateDate(findDate());
+        return byCreateDate;
+    }
+
+    //发送短信
+    @Override
+    public List<Note> MessageSend(List<Attendance> byCreateDate) {
+        List<Note> noteList = new ArrayList<>();
+        for (Attendance attendance : byCreateDate) {
+
+            StudentDetail byId = studentDetailDao.findById(attendance.getSId());
+            attendance.setStudent(byId);
+            //迟到短信
+            if (attendance.getStatus() == 1){
+                Note note = new Note();
+                String mess = MessageXsendUtils.getmessige(attendance.getStudent().getPhone(),null);
+                Map map = (Map) JSON.parse(mess);
+                String value = (String) map.get("status");
+                if (value.equals("error")){
+                    note.setStatus(1);
+                } else if (value.equals("success")){
+                    note.setStatus(0);
+                }
+                note.setName(attendance.getName());
+                note.setPhone(attendance.getStudent().getPhone());
+                note.setTemplateId(1);
+                noteList.add(note);
+            }
+            //旷课短信
+            if (attendance.getStatus() == 2){
+                //给学生发
+                Note note = new Note();
+                Map m = new HashMap();
+                m.put("current_date",DateUtils.date2String(new Date(),"yyyy-MM-dd"));
+                m.put("current_time",DateUtils.date2String(new Date(),"HH:mm"));
+                String code = JSONUtils.toJSONString(m);
+                String mess = MessageXsendUtils.getmessige(attendance.getStudent().getPhone(),code);
+                Map map = (Map) JSON.parse(mess);
+                String value = (String) map.get("status");
+                if (value.equals("error")){
+                    note.setStatus(1);
+                } else if (value.equals("success")){
+                    note.setStatus(0);
+                }
+                note.setName(attendance.getName());
+                note.setPhone(attendance.getStudent().getPhone());
+                note.setTemplateId(2);
+                noteList.add(note);
+                //给家长发
+                Map m2 = new HashMap();
+                m2.put("current_time",DateUtils.date2String(new Date(),"HH:mm"));
+                m2.put("student_name",attendance.getName());
+                String code1 = JSONUtils.toJSONString(m2);
+                Note note1 = new Note();
+                String mess1 = MessageXsendUtils.getmessige(attendance.getStudent().getParentPhone(),code1);
+                Map map1 = (Map) JSON.parse(mess1);
+                String value1 = (String) map.get("status");
+                if (value.equals("error")){
+                    note1.setStatus(1);
+                } else if (value.equals("success")){
+                    note1.setStatus(0);
+                }
+                note1.setName(attendance.getName());
+                note1.setPhone(attendance.getStudent().getParentPhone());
+                note1.setTemplateId(3);
+                noteList.add(note1);
+            }
+        }
+
+        return noteList;
+    }
+
+    //获取当天凌晨时间
+    public Date findDate() {
         String date2String = DateUtils.date2String(new Date(), "yyyy-MM-dd HH:mm");
         String str = " 00:00";
         String  dateStr = date2String.concat(str);
-        Date date = DateUtils.string2Date(dateStr, "yyyy-MM-dd HH:mm");
-        PageHelper.startPage(page,size);
-//        List<Attendance> attendanceList = attendanceDao.findByCreateDate(date);
-//        List<Attendance> stuClassByList = findStuClassByList(attendanceList);
-        return attendanceDao.findByCreateDate(date);
+        Date date = null;
+        try {
+            date = DateUtils.string2Date(dateStr, "yyyy-MM-dd HH:mm");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 
 
@@ -112,4 +198,4 @@ public class AttendanceServiceImpl implements AttendanceService {
         }
         return false;
     }
-} 
+}
