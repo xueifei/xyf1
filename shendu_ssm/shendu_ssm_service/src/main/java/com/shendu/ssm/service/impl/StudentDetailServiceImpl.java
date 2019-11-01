@@ -46,8 +46,6 @@ public class StudentDetailServiceImpl implements StudentDetailService {
         }catch(Exception e){
             e.printStackTrace();
         }
-
-
         return false;
     }
 

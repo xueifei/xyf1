@@ -20,4 +20,10 @@ public interface AttendanceService {
     List<Attendance> findStuClassByList(List<Attendance> attendances);
 
     List<Attendance> findByCreateDate(int page, int size) throws ParseException;
+
+    boolean updateAtt(Attendance attendance);
+
+    Attendance findById(Integer id);
+
+    boolean deleteAtt(Integer id);
 }

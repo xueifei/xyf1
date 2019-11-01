@@ -32,8 +32,7 @@ public class StudentDetailController {
 
         return "addStudent";
     }
-
-    @RequestMapping("/updateStu")
+      @RequestMapping("/updateStu")
     public String updateStu(StudentDetail studentDetail, Model model){
         boolean isTrue = studentDetailService.updateStu(studentDetail);
         model.addAttribute("mess",isTrue?"修改成功":"修改失败");

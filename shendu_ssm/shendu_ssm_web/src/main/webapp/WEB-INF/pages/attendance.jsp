@@ -106,10 +106,6 @@
 							<div class="pull-left">
 								<div class="form-group form-inline">
 									<div class="btn-group">
-										<button type="button" class="btn btn-default" title="新建" onclick="location.href='/student'">
-											<i class="fa fa-file-o"></i> 新建
-										</button>
-										
 										<button type="button" class="btn btn-default" title="刷新">
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
@@ -154,8 +150,8 @@
 											<td>${as.stuClass}</td>
 											<td><fmt:formatDate value="${as.createDate}" pattern="yyyy-MM-dd HH:mm"/></td>
 											<td class="text-center">
-												<a href="${pageContext.request.contextPath}/student/editStu?id=${as.id}" class="btn bg-olive btn-xs">编辑</a>
-												<a href="${pageContext.request.contextPath}/student/editStu?id=${as.id}" class="btn bg-olive btn-xs">删除角色</a>
+												<a href="${pageContext.request.contextPath}/attendance/updateAtt?id=${as.id}" class="btn bg-olive btn-xs">编辑</a>
+												<a href="${pageContext.request.contextPath}/attendance/deleteAtt?id=${as.id}" class="btn bg-olive btn-xs">删除</a>
 											</td>
 										</tr>
 									</c:forEach>

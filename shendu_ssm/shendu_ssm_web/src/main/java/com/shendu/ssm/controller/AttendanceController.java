@@ -6,6 +6,7 @@ import com.shendu.ssm.service.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -63,5 +64,33 @@ public class AttendanceController {
         modelAndView.addObject("attendanceList",pageInfo);
         modelAndView.setViewName("attendance");
         return modelAndView;
+    }
+
+//    @RequestMapping("/updateAtt")
+//    public String updateAtt(Attendance attendance, Model model){
+//        boolean isTrue = attendanceService.updateAtt(attendance);
+//        model.addAttribute("mess",isTrue?"修改成功":"修改失败");
+//        return "redirect:findAll";
+//    }
+    @RequestMapping("updateAtt")
+    public String updateAtt(Model model, Integer id) {
+        Attendance attendance = attendanceService.findById(id);
+        model.addAttribute("attendance", attendance);
+
+        return "editAttendance";
+    }
+
+    @RequestMapping("/updateAttendance")
+    public String updateAttendance(Attendance attendance, Model model){
+        boolean isTrue = attendanceService.updateAtt(attendance);
+        model.addAttribute("mess",isTrue?"修改成功":"修改失败");
+        return "redirect:findByCreateDate";
+    }
+
+    @RequestMapping("/deleteAtt")
+    public String deleteAtt(Integer id, Model model){
+        boolean isTrue = attendanceService.deleteAtt(id);
+        model.addAttribute("mess",isTrue?"删除成功":"删除失败");
+        return "redirect:findByCreateDate";
     }
 }

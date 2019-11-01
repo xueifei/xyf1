@@ -159,7 +159,7 @@
 											</td>
 											<td class="text-center">
 												<a href="editUser?id=${u.id}" class="btn bg-olive btn-xs">编辑</a>
-												<a href="deleteUser?id=${u.id}" class="btn bg-olive btn-xs">删除</a>
+												<a href="deleteUser?id=${u.id}" class="btn bg-olive btn-xs">删除用户</a>
 											</td>
 										</tr>
 									</c:forEach>

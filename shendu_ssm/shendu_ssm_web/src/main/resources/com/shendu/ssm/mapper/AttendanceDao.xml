@@ -70,15 +70,27 @@
 
 
     <insert id="insertInfoBatch" parameterType="java.util.List">
-        insert into attendance ( name, attendance_time, stater,time,s_id)
+        insert into attendance ( name, attendance_time, status,time,s_id)
         values
         <foreach collection="list" item="item" index="index" separator=",">
             ( #{item.name,jdbcType=VARCHAR}, #{item.attendanceDate,jdbcType=TIMESTAMP},#{item.status,jdbcType=INTEGER},#{item.createDate,jdbcType=TIMESTAMP},#{item.sId,jdbcType=INTEGER})
         </foreach>
     </insert>
     <select id="findByCreateDate"  parameterType="java.util.Date" resultType="com.shendu.ssm.domain.Attendance">
-       select a.id, a.name , a.attendance_time attendanceDate, a.stater status,a.time createDate,a.s_id sId,s.stu_class stuClass
+       select a.id, a.name , a.attendance_time attendanceDate, a.status status,a.time createDate,a.s_id sId,s.stu_class stuClass
         from attendance a,student_detail s
         where time>#{date,jdbcType=DATE} AND s.id=a.s_id
     </select>
+
+    <update id="updateAtt">
+        update attendance set name = #{name}, status = #{status} where id = #{id}
+    </update>
+
+    <select id="findById" resultType="com.shendu.ssm.domain.Attendance">
+        select * from attendance where  id = #{id}
+    </select>
+
+    <delete id="deleteAtt">
+        delete from attendance where id = #{id}
+    </delete>
 </mapper>

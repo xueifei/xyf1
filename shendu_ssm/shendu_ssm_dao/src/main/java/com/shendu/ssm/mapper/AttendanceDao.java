@@ -14,4 +14,10 @@ public interface AttendanceDao {
     int insertInfoBatch(List<Attendance> attendanceList);
 
     List<Attendance> findByCreateDate(@Param("date") Date dateStr);
+
+    void updateAtt(Attendance attendance);
+
+    public Attendance findById(Integer id);
+
+    public void deleteAtt(Integer id);
 }

@@ -82,4 +82,34 @@ public class AttendanceServiceImpl implements AttendanceService {
         return attendanceDao.findByCreateDate(date);
     }
 
+
+    @Override
+    public boolean updateAtt(Attendance attendance) {
+        try{
+            attendanceDao.updateAtt(attendance);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    @Override
+    public Attendance findById(Integer id) {
+        Attendance attendance = attendanceDao.findById(id);
+        return attendance;
+    }
+
+    @Override
+    public boolean deleteAtt(Integer id) {
+
+        try {
+            attendanceDao.deleteAtt(id);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 } 

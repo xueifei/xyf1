@@ -79,14 +79,14 @@
 			<!-- 内容头部 -->
 			<section class="content-header">
 			<h1>
-				用户管理 <small>用户表单</small>
+				学生管理 <small>新增学生表单</small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="${pageContext.request.contextPath}/index.jsp"><i
 						class="fa fa-dashboard"></i> 首页</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/student/findAll">学生详细信息</a></li>
-				<li class="active">学生信息表单</li>
+				<li class="active">新增学生表单</li>
 			</ol>
 			</section>
 			<!-- 内容头部 /-->
