@@ -1,6 +1,7 @@
 package com.shendu.ssm.service;
 
 import com.shendu.ssm.domain.Attendance;
+import com.shendu.ssm.domain.Note;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.ParseException;
@@ -20,4 +21,8 @@ public interface AttendanceService {
     List<Attendance> findStuClassByList(List<Attendance> attendances);
 
     List<Attendance> findByCreateDate(int page, int size) throws ParseException;
+
+    List<Attendance> findByCreateDate();
+
+    List<Note> MessageSend(List<Attendance> byCreateDate);
 }

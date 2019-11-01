@@ -15,4 +15,6 @@ public interface NoteDao {
     void deleteNote(int id);
 
     Note findList(int id);
+
+    int insertBatch(List<Note> notes);
 }

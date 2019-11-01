@@ -59,4 +59,9 @@ public class NoteServiceImpl implements NoteService {
         Note note = noteDao.findList(id);
         return note;
     }
+
+    @Override
+    public int insertBatch(List<Note> notes) {
+        return noteDao.insertBatch(notes);
+    }
 }

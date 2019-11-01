@@ -148,7 +148,7 @@
 											<td>${r.phone}</td>
 											<td>${r.name}</td>
 											<td>${r.staterStr}</td>
-                                            <td>${r.templateid}</td>
+                                            <td>${r.templateId}</td>
 											<td class="text-center">
 												<a href="deleteRole?id=${r.id}" class="btn bg-olive btn-xs">删除角色</a>
 											</td>

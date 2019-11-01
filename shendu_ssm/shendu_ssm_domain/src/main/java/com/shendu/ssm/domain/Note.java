@@ -11,7 +11,7 @@ public class Note {
     private String name;
     private Integer status;
     private String staterStr;
-    private Integer templateid;
+    private Integer templateId;//1 学生迟到短信  2 学生旷课短信 3 家长短信
 
     public String getStaterStr() {
         if (status !=null){

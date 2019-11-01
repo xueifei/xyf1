@@ -178,12 +178,19 @@
 
 					</div>
 					<!-- /.box-body -->
-
+					<!-- 批量发短信 -->
+					<div class="btn-group" >
+						<button type="button" class="btn btn-default"  title="批量发送短信" onclick="location.href='${pageContext.request.contextPath}/attendance/messageSend'">
+							<i class="fa fa-file-o"></i> 一键批量发送短信
+						</button>
+					</div>
 					<!-- .box-footer-->
 					<div class="box-footer">
 						<div class="pull-left">
 							<div class="form-group form-inline">
-								总共2 页，共14 条数据。 每页 <select class="form-control">
+								总共${attendanceList.pages}页，共${attendanceList.total} 条数据。 每页
+								<select class="form-control" name="size" id="changePageSize" onchange="changePageSize()">
+									<option>${attendanceList.size}</option>
 									<option>1</option>
 									<option>2</option>
 									<option>3</option>
@@ -195,15 +202,13 @@
 
 						<div class="box-tools pull-right">
 							<ul class="pagination">
-								<li><a href="#" aria-label="Previous">首页</a></li>
-								<li><a href="#">上一页</a></li>
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">下一页</a></li>
-								<li><a href="#" aria-label="Next">尾页</a></li>
+								<li><a href="${pageContext.request.contextPath}/attendance/findByCreateDate?page=1&size=${attendanceList.pageSize}" aria-label="Previous">首页</a></li>
+								<li><a href="${pageContext.request.contextPath}/attendance/findByCreateDate?page=${attendanceList.pageNum-1}&size=${attendanceList.pageSize}">上一页</a></li>
+								<c:forEach begin="1" end="${attendanceList.pages}" var="pageNum">
+									<li><a href="${pageContext.request.contextPath}/attendance/findByCreateDate?page=${pageNum}&size=${attendanceList.pageSize}">${pageNum}</a></li>
+								</c:forEach>
+								<li><a href="${pageContext.request.contextPath}/attendance/findByCreateDate?page=${attendanceList.pageNum+1}&size=${attendanceList.pageSize}">下一页</a></li>
+								<li><a href="${pageContext.request.contextPath}/attendance/findByCreateDate?page=${attendanceList.pages}&size=${attendanceList.pageSize}" aria-label="Next">尾页</a></li>
 							</ul>
 						</div>
 
@@ -280,6 +285,14 @@
 	<script src="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.min.js"></script>
 	<script src="${pageContext.request.contextPath}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
 		<script>
+			function changePageSize() {
+				//获取下拉框的值
+				var size = $("#changePageSize").val();
+
+				//向服务器发送请求，改变没页显示条数
+				location.href = "${pageContext.request.contextPath}/attendance/findByCreateDate?page=1&size="
+						+ size;
+			}
 			$(document).ready(function() {
 				// 选择框
 				$(".select2").select2();
