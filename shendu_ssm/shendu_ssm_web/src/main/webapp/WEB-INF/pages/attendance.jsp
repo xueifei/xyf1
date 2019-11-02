@@ -154,8 +154,8 @@
 											<td>${as.stuClass}</td>
 											<td><fmt:formatDate value="${as.createDate}" pattern="yyyy-MM-dd HH:mm"/></td>
 											<td class="text-center">
-												<a href="${pageContext.request.contextPath}/student/editStu?id=${as.id}" class="btn bg-olive btn-xs">编辑</a>
-												<a href="${pageContext.request.contextPath}/student/editStu?id=${as.id}" class="btn bg-olive btn-xs">删除角色</a>
+												<a href="#" class="btn bg-olive btn-xs">编辑</a>
+												<a href="#" class="btn bg-olive btn-xs">删除角色</a>
 											</td>
 										</tr>
 									</c:forEach>

@@ -13,13 +13,13 @@
     </select>
     <update id="updateNote">
         update noto set  phone = #{phone}, name = #{name}, status = #{status},
-        template_id = #{template_id} where id = #{id}
+        template_id = #{templateId} where id = #{id}
     </update>
     <delete id="deleteNote">
         delete from note where id = #{id}
     </delete>
     <insert id="insertBatch" parameterType="java.util.List">
-        insert into note(phone, name, status, template_num)
+        insert into note(phone, name, status, template_id)
         values
         <foreach collection="list" item="item" index="index" separator=",">
             ( #{item.phone,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR},#{item.status,jdbcType=INTEGER},#{item.templateId,jdbcType=INTEGER})
