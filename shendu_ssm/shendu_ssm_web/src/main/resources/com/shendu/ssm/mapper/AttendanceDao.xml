@@ -79,7 +79,7 @@
     <select id="findByCreateDate"  parameterType="java.util.Date" resultType="com.shendu.ssm.domain.Attendance">
        select a.id, a.name , a.attendance_time attendanceDate, a.status status,a.time createDate,a.s_id sId,s.stu_class stuClass
         from attendance a,student_detail s
-        where time>#{date,jdbcType=DATE} AND s.id=a.s_id
+        where a.time > #{date,jdbcType=DATE} AND a.s_id = s.id
     </select>
 
     <update id="updateAtt">

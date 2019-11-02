@@ -154,12 +154,12 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     //获取当天凌晨时间
     public Date findDate() {
-        String date2String = DateUtils.date2String(new Date(), "yyyy-MM-dd HH:mm");
-        String str = " 00:00";
+        String date2String = DateUtils.date2String(new Date(), "yyyy-MM-dd");
+        String str = " 00:00:00";
         String  dateStr = date2String.concat(str);
         Date date = null;
         try {
-            date = DateUtils.string2Date(dateStr, "yyyy-MM-dd HH:mm");
+            date = DateUtils.string2Date(dateStr, "yyyy-MM-dd HH:mm:ss");
         } catch (ParseException e) {
             e.printStackTrace();
         }

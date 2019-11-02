@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : kekexi
+Source Server         : xue
 Source Server Version : 50637
 Source Host           : 127.0.0.1:3306
 Source Database       : day1024
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50637
 File Encoding         : 65001
 
-Date: 2019-11-02 15:18:45
+Date: 2019-11-02 22:43:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,24 +22,36 @@ DROP TABLE IF EXISTS `attendance`;
 CREATE TABLE `attendance` (
   `id` bigint(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) COLLATE utf8_bin NOT NULL COMMENT '姓名',
-  `attendance_time` datetime NOT NULL COMMENT '记录每天打卡时间',
+  `attendance_time` datetime DEFAULT NULL COMMENT '记录每天打卡时间',
   `status` varchar(50) COLLATE utf8_bin NOT NULL COMMENT '状态',
-  `time` datetime DEFAULT NULL COMMENT '上下班考勤时间',
-  `s_id` int(11) DEFAULT NULL COMMENT '对应学生详情表中id 唯一标识',
+  `time` datetime NOT NULL COMMENT '记录考勤时间',
+  `s_id` int(11) NOT NULL COMMENT '对应学生详情表中id 唯一标识',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of attendance
 -- ----------------------------
-INSERT INTO `attendance` VALUES ('1', '张三', '1899-12-31 00:00:00', '1', '2019-11-02 22:33:47', null);
-INSERT INTO `attendance` VALUES ('2', '李四', '2019-10-24 00:00:00', '0', '2019-11-02 22:33:51', null);
-INSERT INTO `attendance` VALUES ('3', '小五', '2019-10-24 00:00:00', '3', '2019-11-02 22:33:54', null);
-INSERT INTO `attendance` VALUES ('4', '张三', '1899-12-31 00:00:00', '1', '2019-11-02 22:34:00', null);
-INSERT INTO `attendance` VALUES ('5', '李四', '2019-10-24 15:24:00', '0', '2019-11-02 22:34:03', null);
-INSERT INTO `attendance` VALUES ('6', '小五', '2019-10-24 15:24:00', '0', '2019-11-02 00:09:22', '1');
-INSERT INTO `attendance` VALUES ('7', '张三', '1899-12-31 00:00:00', '1', '2019-11-02 00:09:26', '2');
+INSERT INTO `attendance` VALUES ('1', '张三', '1899-12-31 00:00:00', '1', '2019-11-02 22:33:47', '1');
+INSERT INTO `attendance` VALUES ('2', '李四', '2019-10-24 00:00:00', '0', '2019-11-02 22:33:51', '2');
+INSERT INTO `attendance` VALUES ('3', '小五', '2019-10-24 00:00:00', '3', '2019-11-02 22:33:54', '3');
+INSERT INTO `attendance` VALUES ('4', '张三', '1899-12-31 00:00:00', '1', '2019-11-02 22:34:00', '3');
+INSERT INTO `attendance` VALUES ('5', '李四', '2019-10-24 15:24:00', '0', '2019-11-02 22:34:03', '3');
+INSERT INTO `attendance` VALUES ('6', '小五', '2019-10-24 15:24:00', '1', '2019-11-02 00:09:22', '1');
+INSERT INTO `attendance` VALUES ('7', '张三', '1899-12-31 00:00:00', '2', '2019-11-02 00:09:26', '2');
 INSERT INTO `attendance` VALUES ('8', '李四', '2019-10-24 15:24:00', '2', '2019-11-01 00:07:29', '3');
+INSERT INTO `attendance` VALUES ('115', '张三', '1899-12-31 00:00:00', '1', '2019-10-30 14:36:00', '1');
+INSERT INTO `attendance` VALUES ('116', '李四', '2019-10-24 15:24:00', '0', '2019-10-30 14:36:00', '2');
+INSERT INTO `attendance` VALUES ('117', '小五', '2019-10-24 15:24:00', '3', '2019-10-30 14:36:00', '3');
+INSERT INTO `attendance` VALUES ('118', '111', '2019-10-24 15:24:00', '1', '2019-10-24 15:24:00', '4');
+INSERT INTO `attendance` VALUES ('119', '张三', null, '1', '2019-10-30 14:36:00', '1');
+INSERT INTO `attendance` VALUES ('120', '李四', '2019-10-24 15:24:00', '0', '2019-10-30 14:36:00', '2');
+INSERT INTO `attendance` VALUES ('121', '小五', '2019-10-24 15:24:00', '3', '2019-10-30 14:36:00', '3');
+INSERT INTO `attendance` VALUES ('122', '111', '2019-10-24 15:24:00', '1', '2019-10-24 15:24:00', '4');
+INSERT INTO `attendance` VALUES ('123', '张三', '1899-12-31 00:00:00', '1', '2019-10-30 14:36:00', '1');
+INSERT INTO `attendance` VALUES ('124', '李四', '2019-10-24 15:24:00', '0', '2019-10-30 14:36:00', '2');
+INSERT INTO `attendance` VALUES ('125', '小五', '2019-10-24 15:24:00', '3', '2019-10-30 14:36:00', '3');
+INSERT INTO `attendance` VALUES ('126', '111', '2019-10-24 15:24:00', '1', '2019-10-24 15:24:00', '4');
 
 -- ----------------------------
 -- Table structure for note
@@ -52,7 +64,7 @@ CREATE TABLE `note` (
   `status` int(11) DEFAULT NULL COMMENT '0为成功/1为失败  发送状态',
   `template_id` int(11) DEFAULT NULL COMMENT '0为模板一/1为模板二    短信模板',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of note
@@ -60,7 +72,6 @@ CREATE TABLE `note` (
 INSERT INTO `note` VALUES ('1', '111', 'aa', '1', '1');
 INSERT INTO `note` VALUES ('2', '222', 'www', '1', '1');
 INSERT INTO `note` VALUES ('3', '15666363902', '小五', '1', '1');
-INSERT INTO `note` VALUES ('4', '15666363902', '张三', '1', '2');
 INSERT INTO `note` VALUES ('5', '15666363902', '张三', '1', '3');
 INSERT INTO `note` VALUES ('6', '156666666615666363902', '李四', '1', '2');
 INSERT INTO `note` VALUES ('7', '15666363902', '李四', '1', '3');
@@ -74,6 +85,12 @@ INSERT INTO `note` VALUES ('14', '15666363902', '张三', '1', '2');
 INSERT INTO `note` VALUES ('15', '15666363902', '张三', '1', '3');
 INSERT INTO `note` VALUES ('16', '156666666615666363902', '李四', '1', '2');
 INSERT INTO `note` VALUES ('17', '15666363902', '李四', '1', '3');
+INSERT INTO `note` VALUES ('18', '15666363902', '小五', '1', '1');
+INSERT INTO `note` VALUES ('19', '15666363902', '张三', '1', '2');
+INSERT INTO `note` VALUES ('20', '15666363902', '张三', '1', '3');
+INSERT INTO `note` VALUES ('21', '15666363902', '小五', '1', '1');
+INSERT INTO `note` VALUES ('22', '15666363902', '张三', '1', '2');
+INSERT INTO `note` VALUES ('23', '15666363902', '张三', '1', '3');
 
 -- ----------------------------
 -- Table structure for permission
@@ -219,14 +236,14 @@ CREATE TABLE `student_detail` (
   `parent_phone` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '家长手机号',
   `identity` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT '身份证',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of student_detail
 -- ----------------------------
 INSERT INTO `student_detail` VALUES ('1', '张三', '北京111111111111111111', '00000', '15666363902', '15666363902', '142222222222222222');
 INSERT INTO `student_detail` VALUES ('2', '李四', '北京', '00000', '15666363902', '15666363902', '142222222222222222');
-INSERT INTO `student_detail` VALUES ('3', '小五', '北京', '', '1566666666', '15666363902', '142222222222222222');
+INSERT INTO `student_detail` VALUES ('3', '小五', '北京', 'java基础', '1566666666', '15666363902', '142222222222222222');
 INSERT INTO `student_detail` VALUES ('4', 'zhang3111111111111111', '北京11', 'abc', '15666363902', '15666363902', '====');
 INSERT INTO `student_detail` VALUES ('5', 'zhang3', '北京11', '框架', '15666363902', '15666363902', '且无法入无人');
 INSERT INTO `student_detail` VALUES ('6', 'zhang300', '0000111111111111', '00000', '15666363902', '15666363902', '0000');
