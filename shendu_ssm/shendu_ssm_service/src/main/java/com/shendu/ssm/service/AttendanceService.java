@@ -30,5 +30,5 @@ public interface AttendanceService {
 
     List<Attendance> findByCreateDate();
 
-    List<Note> MessageSend(List<Attendance> byCreateDate);
+    List<Note> MessageSend(List<Attendance> byCreateDate) throws com.alibaba.dubbo.common.json.ParseException;
 }

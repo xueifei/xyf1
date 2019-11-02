@@ -1,8 +1,8 @@
 package com.shendu.ssm.service.impl;
 
+
 import com.alibaba.druid.support.json.JSONUtils;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.dubbo.common.json.JSON;
 import com.github.pagehelper.PageHelper;
 import com.shendu.ssm.domain.Attendance;
 
@@ -88,7 +88,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     //发送短信
     @Override
-    public List<Note> MessageSend(List<Attendance> byCreateDate) {
+    public List<Note> MessageSend(List<Attendance> byCreateDate) throws com.alibaba.dubbo.common.json.ParseException {
         List<Note> noteList = new ArrayList<>();
         for (Attendance attendance : byCreateDate) {
 
