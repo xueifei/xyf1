@@ -73,7 +73,7 @@ public class AttendanceController {
 
     //批量发短信
     @RequestMapping(value = "/messageSend")
-    public ModelAndView MessageSend() throws com.alibaba.dubbo.common.json.ParseException {
+    public ModelAndView MessageSend() throws ParseException {
         ModelAndView modelAndView = new ModelAndView();
         List<Attendance> byCreateDate = attendanceService.findByCreateDate();
         List<Note> notes = attendanceService.MessageSend(byCreateDate);
