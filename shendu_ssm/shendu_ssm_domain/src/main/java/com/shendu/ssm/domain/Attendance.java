@@ -1,11 +1,12 @@
 package com.shendu.ssm.domain;
 
+
 import lombok.Data;
 import lombok.ToString;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+
 import java.util.Date;
 
 @Data
@@ -62,7 +63,7 @@ public class Attendance {
 
 
             try {
-                now = df.parse("08:00");
+                now = df.parse(df.format(attendanceDate));
 
 
                 begin = df.parse("08:00");
@@ -117,5 +118,6 @@ public class Attendance {
         }
         return status;
     }
+
 
 }

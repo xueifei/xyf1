@@ -138,7 +138,7 @@
 										<th class="sorting_desc">考勤时间</th>
 										<th class="sorting_asc sorting_asc_disabled">考勤状态</th>
 										<th class="sorting_desc">学生班级</th>
-										<th class="sorting_desc">当前时间</th>
+										<th class="sorting_desc">考勤记录时间</th>
 										<th class="text-center">操作</th>
 									</tr>
 								</thead>
