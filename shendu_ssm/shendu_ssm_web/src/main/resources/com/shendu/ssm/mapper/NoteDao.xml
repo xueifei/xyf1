@@ -13,7 +13,7 @@
     </select>
     <update id="updateNote">
         update noto set  phone = #{phone}, name = #{name}, status = #{status},
-        template_id = #{template_id} where id = #{id}
+        template_id = #{templateId} where id = #{id}
     </update>
     <delete id="deleteNote">
         delete from note where id = #{id}

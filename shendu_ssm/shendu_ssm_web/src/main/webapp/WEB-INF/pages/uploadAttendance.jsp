@@ -1,6 +1,5 @@
-<%@ page import="java.util.Date" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-		 pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -81,7 +80,7 @@
 			<!-- 内容头部 -->
 			<section class="content-header">
 			<h1>
-				考勤信息 <small><% out.print(new java.text.SimpleDateFormat("yyyy-MM-dd ").format(new Date())); %>考勤信息</small>
+				考勤信息 <small>全部上传信息</small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="${pageContext.request.contextPath}/index.jsp"><i
@@ -103,24 +102,12 @@
 						<div class="table-box">
 
 							<!--工具栏-->
-							<div class="pull-left">
-								<div class="form-group form-inline">
-									<div class="btn-group">
-										<button type="button" class="btn btn-default" title="新建" onclick="location.href='/student'">
-											<i class="fa fa-file-o"></i> 新建
-										</button>
-										
-										<button type="button" class="btn btn-default" title="刷新">
-											<i class="fa fa-refresh"></i> 刷新
-										</button>
-									</div>
-								</div>
-							</div>
+
 							<div class="box-tools pull-right">
 								<div class="has-feedback">
 									<input type="text" class="form-control input-sm"
-										placeholder="搜索"> <span
-										class="glyphicon glyphicon-search form-control-feedback"></span>
+										placeholder="搜索">
+									<span class="glyphicon glyphicon-search form-control-feedback"></span>
 								</div>
 							</div>
 							<!--工具栏/-->
@@ -133,30 +120,25 @@
 										<th class="" style="padding-right: 0px"><input
 											id="selall" type="checkbox" class="icheckbox_square-blue">
 										</th>
-										<th class="sorting_asc">ID</th>
 										<th class="sorting_desc">姓名</th>
 										<th class="sorting_desc">考勤时间</th>
 										<th class="sorting_asc sorting_asc_disabled">考勤状态</th>
 										<th class="sorting_desc">学生班级</th>
-										<th class="sorting_desc">考勤记录时间</th>
+										<th class="sorting_desc">记录时间</th>
 										<th class="text-center">操作</th>
 									</tr>
 								</thead>
 								<tbody>
 
-									<c:forEach items="${attendanceList.list}" var="as">
+									<c:forEach items="${attendanceList.list}" var="as" >
 										<tr>
 											<td><input name="ids" type="checkbox"></td>
-											<td>${as.id }</td>
 											<td>${as.name }</td>
 											<td><fmt:formatDate value="${as.attendanceDate}" pattern="yyyy-MM-dd HH:mm"/></td>
 											<td>${as.statusStr}</td>
-											<td>${as.stuClass}</td>
+											<td>${as.student.stuClass}</td>
 											<td><fmt:formatDate value="${as.createDate}" pattern="yyyy-MM-dd HH:mm"/></td>
-											<td class="text-center">
-												<a href="${pageContext.request.contextPath}/attendance/updateAtt?id=${as.id}" class="btn bg-olive btn-xs">编辑</a>
-												<a href="${pageContext.request.contextPath}/attendance/deleteAtt?id=${as.id}" class="btn bg-olive btn-xs">删除</a>
-											</td>
+
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -178,41 +160,7 @@
 
 					</div>
 					<!-- /.box-body -->
-					<!-- 批量发短信 -->
-					<div class="btn-group" >
-						<button type="button" class="btn btn-default"  title="批量发送短信" onclick="location.href='${pageContext.request.contextPath}/attendance/messageSend'">
-							<i class="fa fa-file-o"></i> 一键批量发送短信
-						</button>
-					</div>
-					<!-- .box-footer-->
-					<div class="box-footer">
-						<div class="pull-left">
-							<div class="form-group form-inline">
-								总共${attendanceList.pages}页，共${attendanceList.total} 条数据。 每页
-								<select class="form-control" name="size" id="changePageSize" onchange="changePageSize()">
-									<option>${attendanceList.size}</option>
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
-								</select> 条
-							</div>
-						</div>
 
-						<div class="box-tools pull-right">
-							<ul class="pagination">
-								<li><a href="${pageContext.request.contextPath}/attendance/findByCreateDate?page=1&size=${attendanceList.pageSize}" aria-label="Previous">首页</a></li>
-								<li><a href="${pageContext.request.contextPath}/attendance/findByCreateDate?page=${attendanceList.pageNum-1}&size=${attendanceList.pageSize}">上一页</a></li>
-								<c:forEach begin="1" end="${attendanceList.pages}" var="pageNum">
-									<li><a href="${pageContext.request.contextPath}/attendance/findByCreateDate?page=${pageNum}&size=${attendanceList.pageSize}">${pageNum}</a></li>
-								</c:forEach>
-								<li><a href="${pageContext.request.contextPath}/attendance/findByCreateDate?page=${attendanceList.pageNum+1}&size=${attendanceList.pageSize}">下一页</a></li>
-								<li><a href="${pageContext.request.contextPath}/attendance/findByCreateDate?page=${attendanceList.pages}&size=${attendanceList.pageSize}" aria-label="Next">尾页</a></li>
-							</ul>
-						</div>
-
-					</div>
 					<!-- /.box-footer-->
 
 				</div>
@@ -285,14 +233,14 @@
 	<script src="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.min.js"></script>
 	<script src="${pageContext.request.contextPath}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
 		<script>
-		function changePageSize() {
-			//获取下拉框的值
-			var pageSize = $("#changePageSize").val();
+			function changePageSize() {
+				//获取下拉框的值
+				var size = $("#changePageSize").val();
 
-			//向服务器发送请求，改变没页显示条数
-			location.href = "${pageContext.request.contextPath}/attendance/findByCreateDate?page=1&size="
-					+ pageSize;
-		}
+				//向服务器发送请求，改变没页显示条数
+				location.href = "${pageContext.request.contextPath}/attendance/upload?page=1&size="
+						+ size;
+			}
 			$(document).ready(function() {
 				// 选择框
 				$(".select2").select2();

@@ -116,28 +116,35 @@ public class ReadExcel {
                         attendance.setName(getValue(cell));//姓名
 
                     } else if (c == 1) {
-
-                        try {
-                            attendance.setAttendanceDate(DateUtils.string2Date(getValue(cell),"yyyy-MM-dd HH:mm"));//考勤时间
-                        } catch (ParseException e) {
-                            e.printStackTrace();
+                        if (getValue(cell) !=null){
+                            try {
+                                attendance.setAttendanceDate(DateUtils.string2Date(getValue(cell),"yyyy-MM-dd HH:mm"));//考勤时间
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
                         }
 
-                    } else if (c == 2){  
-
+                    } else if (c == 2){
+                        if (getValue(cell) !=null){
                             attendance.setStatus(Integer.valueOf(getValue(cell)));//状态
+                        }
+
 
                     } else if (c == 3) {
-
-                        try {
-                            attendance.setCreateDate(DateUtils.string2Date(getValue(cell),"yyyy-MM-dd HH:mm"));//考勤时间
-                        } catch (ParseException e) {
-                            e.printStackTrace();
+                        if (getValue(cell) !=null){
+                            try {
+                                attendance.setCreateDate(DateUtils.string2Date(getValue(cell),"yyyy-MM-dd HH:mm"));//记录时间
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
                         }
 
-                    }else if (c == 4){
 
-                        attendance.setSId(Integer.valueOf(getValue(cell)));//学生详情id
+                    }else if (c == 4){
+                        if (getValue(cell) !=null){
+                            attendance.setSId(Integer.valueOf(getValue(cell)));//学生详情id
+                        }
+
 
                     }
                 }  
